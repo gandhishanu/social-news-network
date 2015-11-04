@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #facebook auth gem
 gem 'omniauth-facebook'
 
+# Use Haml as the templating library
+gem 'haml'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
