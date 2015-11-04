@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
    
     if session[:user_id]
-      
       # Means our user is signed in. Add the authorization to the user
       User.find(session[:user_id]).add_provider(auth_hash)
       
