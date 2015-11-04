@@ -1,0 +1,15 @@
+-#  This file is app/views/posts/index.html.haml
+%h1 All Posts
+
+%table#posts
+  %thead
+    %tr
+      %th Forum
+  %tbody
+    - @posts.each do |pst|
+      %tr
+        %td= link_to "#{pst.title}", movie_path(pst)
+
+= form_tag new_post_path do
+  = submit_tag 'Create new post'
+  

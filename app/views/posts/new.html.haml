@@ -1,0 +1,15 @@
+-#  This file is app/views/posts/new.html.haml
+%h1 Create New Post
+
+= form_tag post_path do
+
+  = label :posts, :title, 'Title'
+  = text_field :posts, 'title'
+
+  = label :posts, :text, 'Text'
+  = text_field :posts, 'text'
+
+  = submit_tag 'Save Changes'
+
+
+= link_to 'Return to Posts', posts_path
