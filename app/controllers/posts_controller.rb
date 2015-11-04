@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     end
   
     def create
+        puts post_params
         @post = Post.create!(post_params)
         flash[:notice] = "#{@post.title} was successfully created."
         redirect_to posts_path

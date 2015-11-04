@@ -8,8 +8,8 @@
   %tbody
     - @posts.each do |pst|
       %tr
-        %td= link_to "#{pst.title}", movie_path(pst)
+        %td= link_to "#{pst.title}", post_path(pst)
 
-= form_tag new_post_path do
+= form_tag new_post_path, :method => :get do
   = submit_tag 'Create new post'
   
