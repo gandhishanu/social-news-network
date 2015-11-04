@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
   
+  resources :posts
   get '/login', :to => 'sessions#new', :as => :login
   get '/auth/:provider/callback', :to => 'sessions#create'
   get '/auth/failure', :to => 'sessions#failure'
 
   get '/logout', :to => 'sessions#destroy'
+
+  root :to => "posts#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
