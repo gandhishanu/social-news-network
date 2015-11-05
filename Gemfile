@@ -36,6 +36,9 @@ gem 'omniauth-facebook'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+#wysiwyg
+gem "wysiwyg-rails", "2.0.0.pre.rc.3"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
