@@ -6,7 +6,15 @@
   </p>
   
   <p>
-    <%= @post.thumbnail %>
+    <div style = "background-color:#EEEEEE;">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= @post.created_at %>
+    </div>
+  </p>
+  
+  glyphicon glyphicon-calendar
+  
+  <p>
+    <%= image_tag(@post.thumbnail.html_safe) %>
   </p>
   
   <p>
