@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :body %><br>
-    <textarea id="eg-textarea" class="text-small"></textarea>
+    <%= f.text_area :body, id:"froala-editor", class:"small_text" %>
   </div>
   <div class="field">
     <%= f.label :thumbnail %><br>
@@ -28,11 +28,8 @@
   </div>
 <% end %>
 
-
 <%= javascript_tag do %>
   $(function() {
-    $('textarea#eg-textarea').editable({
-      inlineMode: false
-    })
+    $('textarea#froala-editor').froalaEditor()
   });
 <% end %>
