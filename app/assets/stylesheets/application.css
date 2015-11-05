@@ -27,6 +27,7 @@
  *= require plugins/line_breaker.min.css
  *= require plugins/table.min.css
  *= require plugins/video.min.css
+ *= require style.css
  */
  
 /* Override Bootstrap 3 font locations */
@@ -38,3 +39,4 @@
     url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
     url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+
