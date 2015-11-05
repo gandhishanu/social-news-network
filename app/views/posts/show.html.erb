@@ -5,10 +5,11 @@
   <%= @post.title %>
 </p>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
+
+  <%= @post.body.gsub("fr-video ", "").html_safe %>
+
+
+<div class="fr-video fr-dvi"><iframe width="640" height="360" src="//www.youtube.com/embed/cZLYvI-I0Ig"></iframe></div>
 
 <p>
   <strong>Thumbnail:</strong>
