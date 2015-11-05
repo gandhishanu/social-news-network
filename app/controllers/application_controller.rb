@@ -4,10 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   def set_current_user
-    puts("AAAAAYYYYYYYYYYYYY")
-    @current_user ||= session[:session_token] && User.find_by_session_token(session[:session_token])
+    puts("YYYYYYYYYYYYYYYYYYYYYYYYYYY")
+    @current_user = User.find_by session_token: (session[:session_token])
     if !@current_user.nil? 
       @display_name = @current_user[:user_id]
+    else
+      puts("XXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     end
   end
   before_filter :set_current_user
