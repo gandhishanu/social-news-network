@@ -37,6 +37,32 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
+    <div class='modal fade' id="loginModal" tabindex=-1 role="dialog"> 
+      <div class='modal-dialog modal-sm'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <%= link_to "&times;".html_safe, '#', class: 'close', data:{dismiss:'modal'}, aria:{hidden:'true'} %>
+            <h3> Login Form </h3>
+          </div>
+          <div class='modal-body'>
+            <%= link_to "/auth/facebook", {:style=>'color:#3b5998;'} do %>
+              <div class="btn-lg btn-block btn-social btn-facebook" background-color="#3b5998"> 
+                  <i class="fa fa-facebook"></i> Sign in with Facebook
+              </div>
+            <% end %>
+            <%= form_tag login_path, :method => :post do %>
+              <div class='form-group'>
+              <%= text_field :user, :user_id, :class => "form-control", :autocomplete=>"on",:type=>"text", :placeholder=>"User ID", :autofocus=>"true", :required=>"true" %>
+  	          </div>
+              <div class='form-group'>
+              <%= text_field :user, :password, :class =>"form-control", :type=>"password",:placeholder=>"Password", :required=>"true" %>
+              </div>
+              <a href="#" class="btn btn-primary" role="button">Login</a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -58,19 +84,15 @@
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
-          <div class="navbar-form navbar-right" role="user-session">
-            <a class="btn btn-default" href="#">
-              <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> SIGN OUT
-            </a>
-            <a class="btn btn-default" href="#">
-              <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> SIGN IN
-            </a>
-            <a class="btn btn-default" href="#">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> SIGN UP
-            </a>
-          </div>
-          <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
-
+          <ul class="nav navbar-nav navbar-right">
+            <% if @current_user.nil? %>
+              <li><%= link_to "Login", '#loginModal', class:'navbar-link', data:{toggle:'modal'}%></li> 
+              <li><%= link_to "Create Account", '#loginModal', class:'navbar-link', data:{toggle:'modal'}%></li>
+            <% else %>
+              <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link"><%= @current_user.name %></a></p>
+              <li><%= button_to "Logout", logout_path, method: 'delete', class:"btn navbar-btn btn-default" %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>

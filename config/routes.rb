@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   
   resources :posts
   get '/login', :to => 'sessions#new', :as => :login
-  get '/auth/:provider/callback', :to => 'sessions#create'
+  get '/auth/:provider/callback', :to => 'sessions#create_omniauth'
   get '/auth/failure', :to => 'sessions#failure'
 
-  get '/logout', :to => 'sessions#destroy'
+  match '/logout', to: 'sessions#destroy', via: :delete
 
   root :to => "posts#index"
 
