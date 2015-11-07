@@ -13,7 +13,7 @@ Given /^I am on the SNN home page$/ do
   click_button 'Create Post'
  end
 
- Then /^I should see a post list entry with title "(.*?)" and body "(.*?)" and thumbnail "(.*?)"$/ do |title, body, thumbnail|
+ Then /^I should see a post entry with title "(.*?)" and body "(.*?)" and thumbnail "(.*?)"$/ do |title, body, thumbnail|
    result=false
    all("div").each do |tr|
      if tr.has_content?(title) && tr.has_content?(body) && tr.has_content?(thumbnail)
@@ -24,3 +24,18 @@ Given /^I am on the SNN home page$/ do
   expect(result).to be_truthy
  end
 
+
+ When /^I have edited the post "(.*?)" to change the thumbnail to "(.*?)"$/ do |post, thumbnail|
+  click_on "Edit"
+  fill_in 'post_thumbnail', :with => thumbnail
+  click_button 'Update Post'
+ end
+ 
+  When /^I have visited the epanded page for the "(.*?)" post$/ do |title|
+   visit posts_path
+   click_on "More about #{title}"
+ end
+ 
+  Then /^(?:|I )should see "([^"]*)"$/ do |text|
+    expect(page).to have_content(text)
+ end
