@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   
     has_many :authorizations
     
-    before_save { self.email = email.downcase }
-    validates :user_id, presence: true, length: { maximum: 50 }
-    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    validates :email, presence: true, length: { maximum: 255 },format: { with: VALID_EMAIL_REGEX }
+    #before_save { self.email = email.downcase }
+    #validates :user_id, presence: true, length: { maximum: 50 }
+    #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    #validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
     
     
     def self.create_user! (hash)
