@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', :to => 'sessions#create_omniauth'
   get '/auth/failure', :to => 'sessions#failure'
 
-  match '/logout', to: 'sessions#destroy', via: :delete
+  get '/logout', to: 'sessions#destroy'
 
+  get '/login2', :to => 'sessions#create'
   root :to => "posts#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

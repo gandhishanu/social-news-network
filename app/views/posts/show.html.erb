@@ -11,14 +11,12 @@
     </div>
   </p>
   
-  glyphicon glyphicon-calendar
-  
   <p>
     <%= image_tag(@post.thumbnail.html_safe) %>
   </p>
   
   <p>
-    <%= @post.body.html_safe %>
+    <%= @post.body.gsub("fr-video ", "").html_safe %>
   </p>
   
 </div>

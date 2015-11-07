@@ -2,6 +2,16 @@ class SessionsController < ApplicationController
   def new
   end
 
+  def create
+    user = User.take
+    if user
+      session[:session_token] = user.session_token
+    else
+      flash[:notice] = "Invalid user-id or E-mail."
+    end
+    redirect_to posts_path
+  end
+
   def create_omniauth
     auth_hash = request.env['omniauth.auth']
    
