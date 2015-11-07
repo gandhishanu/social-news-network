@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'New Post', new_post_path %>
-
 <div class="row grid">
   <% @posts.each do |post| %>
       <div class="col-sm-6 col-md-3 grid-item">
@@ -9,8 +7,9 @@
           <img src="<%= post.thumbnail %>" alt="<%= post.title %>">
           <div class="caption">
             <h3><%= post.title %></h3>
-            <p><%= post.body %></p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            <% body = strip_tags(post.body) %>
+            <p><%= body[0..200].gsub(/\s\w+\s*$/,'...') %></p>
+            <p><a href="<%= url_for post_path(post) %>" class="btn btn-primary" role="button">View</a></p>
           </div>
         </div>
       </div>
