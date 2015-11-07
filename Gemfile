@@ -37,6 +37,9 @@ gem 'omniauth'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+#wysiwyg
+gem "wysiwyg-rails", "2.0.0.pre.rc.3"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -46,6 +49,15 @@ group :development, :test do
   
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'rspec-expectations'
+  gem 'cucumber-rails' 
 end
 
 group :development do
@@ -54,7 +66,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'rspec-rails'
 end
   
   
