@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     #attr_accessible :user_id, :name, :email
   
     has_many :authorizations
+    validates :name, :email, :presence => true
     
     #before_save { self.email = email.downcase }
     #validates :user_id, presence: true, length: { maximum: 50 }
@@ -15,7 +16,7 @@ class User < ActiveRecord::Base
       hash[:session_token]= session
       User.create!(hash)
     end
-    
+
     def add_provider(auth_hash)
       # Check if the provider already exists, so we don't add it twice
       unless authorizations.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"])
