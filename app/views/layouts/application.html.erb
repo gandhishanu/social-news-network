@@ -75,18 +75,20 @@
         <a class="navbar-brand" href="<%= request.base_url %>">SNN</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <div class="navbar-form navbar-left">
-            <a class="btn btn-default" href="#">
+            <a class="btn btn-default" href="#" onclick="alert('Scheduled for upcoming sprints!!!')">
               <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> CATEGORIES
             </a>
           </div>
           <div class="navbar-form navbar-right" role="user-session">
             <% if @current_user.nil? %>
-            <a class="btn btn-default" href="#loginModal" data-toggle="modal">
-              <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> SIGN IN
+            <a class="btn btn-default" href="<%= url_for "/auth/facebook" %>">
+              <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> SIGN IN via Facebook
             </a>
+            <!--
             <a class="btn btn-default" href="#loginModal" data-toggle="modal">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> SIGN UP
             </a>
+            -->
             <% else %>
             <div class="btn-group">
               <button type="button" class="btn btn-default">
@@ -99,7 +101,7 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="#">
+                  <a href="#" onclick="alert('Scheduled for upcoming sprints!!!')">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Profile
                   </a>
                 </li>
@@ -121,11 +123,11 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button">
+                <button class="btn btn-default" type="button" onclick="alert('Scheduled for upcoming sprints!!!')">
                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
               </span>
-            </div><!-- /input-group -->
+            </div>
           </form>
         </div>
       </div>
