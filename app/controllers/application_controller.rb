@@ -22,3 +22,7 @@ class ApplicationController < ActionController::Base
     end
   end
 end
+
+def new_user_registration
+  
+end

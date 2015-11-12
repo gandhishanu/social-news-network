@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
   
+  #get 'users/new'
+   resources :users
+  get 'signup'  => 'users#new'
+
   resources :posts
   get '/login', :to => 'sessions#new', :as => :login
   get '/auth/:provider/callback', :to => 'sessions#create'
   get '/auth/failure', :to => 'sessions#failure'
+  
 
   get '/logout', :to => 'sessions#destroy'
 
