@@ -57,6 +57,23 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def search
+    puts params[:search_terms]
+    @posts = Array.new()
+    allposts = Post.all
+    allposts.each do |pst|
+      if pst.title.downcase.include?(params[:search_terms].downcase) || pst.body.downcase.include?(params[:search_terms].downcase)
+        @posts.push pst
+      end
+    end
+    
+    if @posts == nil || @posts.empty?
+      @posts = Post.all
+      flash[:notice] = "No posts were found"
+      render :index
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

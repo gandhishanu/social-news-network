@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get '/login2', :to => 'sessions#create'
   root :to => "posts#index"
+  
+  get '/search', :to => 'posts#search'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
