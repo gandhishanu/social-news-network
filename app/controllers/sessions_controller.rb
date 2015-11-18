@@ -5,13 +5,13 @@ class SessionsController < ApplicationController
 
 	def	create	
 		user	=	User.find_by_email(params[:user][:email])	
-		if	user && user.authenticate(params[:user][:password])	
+		if	user && user.authenticate( params[:user][:password] )	
 			#sign	in	and	redirect	to	show	page	
 			session[:session_token]=	user.session_token
-			redirect_to root_path
 		else	
 			flash[:warning]	=	'Invalid	email/password	combination'
-		end			
+		end	
+		redirect_to root_path
 	end
 
   def create_omniauth

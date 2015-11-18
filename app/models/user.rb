@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_secure_password  
     
   def self.create_user! (hash)
+    puts("AAAAAAAAAAAAAAAAAAAAAA")
+    puts(hash.to_s)
     hash[:session_token] = SecureRandom.urlsafe_base64	
     User.create!(hash)
   end
