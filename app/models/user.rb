@@ -1,16 +1,19 @@
 class User < ActiveRecord::Base
   
+  has_secure_password  	
+  
   has_many :authorizations
   validates :name, :email, :presence => true
     
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 230 }, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },uniqueness:{case_sensitive:false}
-  #validates :password, presence: true, length: { minimum: 6 }
-  has_secure_password  
+  validates :password, presence: true, length: { minimum: 6 }
+  validates_confirmation_of :password
+
     
   def self.create_user! (hash)
-    puts("AAAAAAAAAAAAAAAAAAAAAA")
+    puts("AAAAAAAAAAAAAAAAAA")
     puts(hash.to_s)
     hash[:session_token] = SecureRandom.urlsafe_base64	
     User.create!(hash)
@@ -23,5 +26,7 @@ class User < ActiveRecord::Base
     end
   end
   	
+ 
+  
 end
 

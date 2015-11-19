@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_filter :set_current_user
+    
   def new
   end
   def show
@@ -16,7 +19,7 @@ class UsersController < ApplicationController
         flash[:success] = "Welcome #{@user.name}. Your account has been created."
         redirect_to root_path
       else
-        flash[:warning] = "Error" 
+        flash[:warning] = user.errors.full_messages.first
         redirect_to new_user_path
       end
     end
