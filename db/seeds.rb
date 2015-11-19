@@ -51,3 +51,6 @@ posts = [{:title=>'Petition To Rename Australian Currency', :thumbnail=>'http://
 posts.each do |post|
   Post.create!(post)
 end
+
+#$("#grid li").each(function(){console.log('<token1>' + $(this).find("h4").text() + '<token2>' + $(this).find("img").attr("src") + "<token3>" + $(this).find("p").text())})
+
