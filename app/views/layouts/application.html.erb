@@ -53,12 +53,12 @@
             <% end %>
             <%= form_tag login_path, :method => :post do %>
               <div class='form-group'>
-              <%= text_field :user, :user_id, :class => "form-control", :autocomplete=>"on",:type=>"text", :placeholder=>"User ID", :autofocus=>"true", :required=>"true" %>
+              <%= text_field :user, :email, :class => "form-control", :autocomplete=>"on",:type=>"text", :placeholder=>"Email", :autofocus=>"true", :required=>"true" %>
   	          </div>
               <div class='form-group'>
               <%= text_field :user, :password, :class =>"form-control", :type=>"password",:placeholder=>"Password", :required=>"true" %>
               </div>
-              <a href="#" class="btn btn-primary" role="button">Login</a>
+              <%= submit_tag "Login", :class=>"btn btn-primary" %>
             <% end %>
           </div>
         </div>
@@ -81,14 +81,19 @@
           </div>
           <div class="navbar-form navbar-right" role="user-session">
             <% if @current_user.nil? %>
+            <!--
             <a class="btn btn-default" href="<%= url_for "/auth/facebook" %>">
               <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> SIGN IN via Facebook
             </a>
-            <!--
+            -->
+            
             <a class="btn btn-default" href="#loginModal" data-toggle="modal">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Sign In
+            </a>
+            <a class="btn btn-default" href= "signup">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> SIGN UP
             </a>
-            -->
+            
             <% else %>
             <div class="btn-group">
               <button type="button" class="btn btn-default">
@@ -142,7 +147,7 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2015</p>
+        <p>&copy; Social News Network</p>
       </footer>
 
     </div> <!-- /container -->

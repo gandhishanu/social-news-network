@@ -11,14 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20151119231903) do
+=======
 ActiveRecord::Schema.define(version: 20151120050224) do
+>>>>>>> 030116df6061871ac501507251c96146cbec51e4
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "session_token"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -43,9 +48,12 @@ ActiveRecord::Schema.define(version: 20151120050224) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "session_token"
+    t.string   "password_digest"
+    t.boolean  "email_confirmed",      default: false, null: false
+    t.string   "email_confirm_string"
   end
 
 end

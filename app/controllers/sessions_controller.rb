@@ -3,13 +3,26 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def create
+	def	create	
+		user	=	User.find_by_email(params[:user][:email])	
+		if	user && user.authenticate( params[:user][:password] ) && user.email_confirmed
+			#sign	in	and	redirect	to	show	page	
+			session[:session_token]=	user.session_token
+		elsif user.email_confirmed == false
+		  flash[:warning] = 'Please confirm your email before logging in.'
+		else
+			flash[:warning]	=	'Invalid	email/password	combination'
+		end
+		redirect_to root_path
+	end
+
+  def create_omniauth
     auth_hash = request.env['omniauth.auth']
-    if session[:user_id]
-      User.find(session[:user_id]).add_provider(auth_hash)
+    if session[:session_token]
+      User.find_by_session_token(session[:session_token]).add_provider(auth_hash)
     else
       auth = Authorization.find_or_create(auth_hash)
-      session[:user_id] = auth.user.id
+      session[:session_token] = auth.session_token
     end
     set_current_user
     redirect_to root_path
@@ -20,7 +33,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:session_token] = nil
+    @current_user = nil
+    flash[:notice]=	'You have logged out'	
     redirect_to root_path
   end
 end
