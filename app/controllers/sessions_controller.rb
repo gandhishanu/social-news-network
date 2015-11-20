@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 		  flash[:warning] = 'Please confirm your email before logging in.'
 		else
 			flash[:warning]	=	'Invalid	email/password	combination'
-		end	
+		end
 		redirect_to root_path
 	end
 

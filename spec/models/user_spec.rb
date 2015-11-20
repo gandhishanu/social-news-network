@@ -4,8 +4,12 @@ require 'spec_helper'
 describe User do
 	describe 'User Model' do
 		before :each do
-      		@user1 = [User.new(:name => 'michael', :email=> 'mkoscak@uiowa.edu')]
-            @user2 = User.omniauth(mock_auth_hash)
+		    #mock_auth_hash[:name] = 'mock_test'
+		    #mock_auth_hash[:email] = 'mock@test.net'
+		    #mock_auth_hash[:password] = 'testpass'
+		    #mock_auth_hash[:password_confirmation] = 'testpass'
+      		@user1 = [User.new(:name => 'michael', :email=> 'mkoscak@uiowa.edu', :password => 'testpass', :password_confirmation => 'testpass')]
+            @user2 = Authorization.find_or_create(mock_auth_hash)
     end  
 		context 'Create user with our website' do
 			it 'should create a user in the database' do
