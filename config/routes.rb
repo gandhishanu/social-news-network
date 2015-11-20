@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   match '/login', to: 'sessions#new', via: :get
   get '/auth/:provider/callback', :to => 'sessions#create_omniauth'
   get '/auth/failure', :to => 'sessions#failure'
+  
+  match '/users/validate/:id/:email_confirm_string', to: 'users#validate_from_email', via: :get
+  match '/users/pwr/:id/:email_confirm_string', to: 'users#passwordreset', via: :get
 
   get '/logout', :to => 'sessions#destroy'
 

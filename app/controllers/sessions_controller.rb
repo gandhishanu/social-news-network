@@ -5,10 +5,12 @@ class SessionsController < ApplicationController
 
 	def	create	
 		user	=	User.find_by_email(params[:user][:email])	
-		if	user && user.authenticate( params[:user][:password] )	
+		if	user && user.authenticate( params[:user][:password] ) && user.email_confirmed
 			#sign	in	and	redirect	to	show	page	
 			session[:session_token]=	user.session_token
-		else	
+		elsif user.email_confirmed == false
+		  flash[:warning] = 'Please confirm your email before logging in.'
+		else
 			flash[:warning]	=	'Invalid	email/password	combination'
 		end	
 		redirect_to root_path

@@ -1,0 +1,8 @@
+Welcome to example.com, <%= @user.name %>
+===============================================
+ 
+You have successfully signed up to Social News Network,
+ 
+To login to the site, just follow this link: <%= @url + "users/validate/" + @user.id.to_s + "/" + @user.email_confirm_string.to_s %>
+ 
+Thanks for joining and have a great day!

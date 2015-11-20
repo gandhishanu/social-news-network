@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
 
     
   def self.create_user! (hash)
-    puts("AAAAAAAAAAAAAAAAAA")
-    puts(hash.to_s)
+    hash[:email_confirm_string] = SecureRandom.uuid
     hash[:session_token] = SecureRandom.urlsafe_base64	
     User.create!(hash)
   end
