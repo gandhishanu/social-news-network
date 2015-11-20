@@ -49,18 +49,23 @@ describe PostsController do
     end
     describe 'create method' do
         it 'should save the post with the parameters given' do
-            post :create
+            post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
             fake_post = double(Post.new, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}})
-            expect(Post).to receive(:new).and_return(fake_post)
-            expect(Post).to receive(:save).and_return(true)
-            expect(response).to render_template('posts/index')
+            expect(Post).to receive(:new).and_return(fake_post, :save => true)
+            expect(response).to redirect_to('/posts/1')
         end
         it 'might not save the post correctly' do
-            post :create
+             post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
             fake_post = double(Post.new, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}})
-            expect(Post).to receive(:new).and_return(fake_post)
-            expect(Post).to receive(:save).and_return(false)
-            expect(response).to render_template('posts/new')
+            expect(Post).to receive(:new).and_return(fake_post, :save => false)
+            expect(response).to redirect_to('posts/new')
+        end
+    end
+    describe 'destroy method' do
+        it 'should destroy the selected post and redirect back to the homepage' do
+            post :destroy
+            expect(Post).to receive(:destroy)
+            expect(response).to redirect_to('posts/index')
         end
     end
     describe 'searching posts' do
@@ -76,10 +81,10 @@ describe PostsController do
         end
         describe 'after valid search' do
             it 'should select the Search Results template for rendering' do
+                post :search, {:search_terms => 'Test'}
                 fake_post = double(Post.new, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}})
                 expect(Post).to receive(:all).and_return(fake_post)
-                post :search, {:search_terms => 'Test'}
-                expect(response).to render_template('search')
+                expect(response).to render_template('posts/search')
             end
             it 'should make the TMDb search results available to that template' do
                 assigns(:posts).should == @fake_post
