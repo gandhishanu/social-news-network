@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151119231903) do
+=======
+ActiveRecord::Schema.define(version: 20151120050224) do
+>>>>>>> 030116df6061871ac501507251c96146cbec51e4
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -34,9 +38,12 @@ ActiveRecord::Schema.define(version: 20151119231903) do
     t.string   "title"
     t.text     "body"
     t.string   "thumbnail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
   end
+
+  add_index "posts", ["category_id"], name: "index_posts_on_category_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

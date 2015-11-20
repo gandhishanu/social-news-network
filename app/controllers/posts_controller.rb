@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.where(params.permit(:category_id))
   end
 
   # GET /posts/1
@@ -55,6 +55,22 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  
+  def search
+    puts params[:search_terms]
+    @posts = Array.new()
+    Post.all.each do |pst|
+      if pst.title.downcase.include?(params[:search_terms].downcase) || pst.body.downcase.include?(params[:search_terms].downcase)
+        @posts.push pst
+      end
+    end
+    
+    if @posts == nil || @posts.empty?
+      @posts = Post.all
+      flash[:notice] = "No posts were found"
+      render :index
     end
   end
 
