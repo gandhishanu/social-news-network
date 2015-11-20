@@ -3,9 +3,16 @@ Rails.application.routes.draw do
   
   resources :categories
   resources :posts
-  get '/login', :to => 'sessions#new', :as => :login
-  get '/auth/:provider/callback', :to => 'sessions#create'
+  resources :users
+  
+  get '/signup'  => 'users#new'
+  match '/login', to: 'sessions#create', via: :post
+  match '/login', to: 'sessions#new', via: :get
+  get '/auth/:provider/callback', :to => 'sessions#create_omniauth'
   get '/auth/failure', :to => 'sessions#failure'
+  
+  match '/users/validate/:id/:email_confirm_string', to: 'users#validate_from_email', via: :get
+  match '/users/pwr/:id/:email_confirm_string', to: 'users#passwordreset', via: :get
 
   get '/logout', :to => 'sessions#destroy'
 
