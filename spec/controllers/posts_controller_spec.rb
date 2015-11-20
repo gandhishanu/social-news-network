@@ -34,4 +34,56 @@ describe PostsController do
         end
     end
 =end
+    describe 'index method' do
+        it 'should set the posts variable to all the posts' do
+            post :index
+            assigns(:posts).should == Post.all
+            expect(response).to render_template('posts/index')
+        end
+    end
+    describe 'new method' do
+        it 'should call the method new for the post model' do
+            post :new
+            expect(response).to render_template('posts/new')
+        end
+    end
+    describe 'create method' do
+        it 'should save the post with the parameters given' do
+            post :create
+            fake_post = double(Post.new, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}})
+            expect(Post).to receive(:new).and_return(fake_post)
+            expect(Post).to receive(:save).and_return(true)
+            expect(response).to render_template('posts/index')
+        end
+        it 'might not save the post correctly' do
+            post :create
+            fake_post = double(Post.new, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}})
+            expect(Post).to receive(:new).and_return(fake_post)
+            expect(Post).to receive(:save).and_return(false)
+            expect(response).to render_template('posts/new')
+        end
+    end
+    describe 'searching posts' do
+        it 'should check for invalid search terms' do
+            post :search,  {:search_terms => ''}
+            expect(response).to_not render_template('search')
+        end
+        it 'should go to the homepage if no movies were found' do
+            post :search, {:search_terms => "SELT"}
+            assigns(:posts).should == Post.all
+            expect(response).to_not render_template('search')
+            expect(response).to render_template('posts/index')
+        end
+        describe 'after valid search' do
+            it 'should select the Search Results template for rendering' do
+                fake_post = double(Post.new, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}})
+                expect(Post).to receive(:all).and_return(fake_post)
+                post :search, {:search_terms => 'Test'}
+                expect(response).to render_template('search')
+            end
+            it 'should make the TMDb search results available to that template' do
+                assigns(:posts).should == @fake_post
+            end
+        end
+    end
 end

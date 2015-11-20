@@ -61,8 +61,7 @@ class PostsController < ApplicationController
   def search
     puts params[:search_terms]
     @posts = Array.new()
-    allposts = Post.all
-    allposts.each do |pst|
+    Post.all.each do |pst|
       if pst.title.downcase.include?(params[:search_terms].downcase) || pst.body.downcase.include?(params[:search_terms].downcase)
         @posts.push pst
       end
