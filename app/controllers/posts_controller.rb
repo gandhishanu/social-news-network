@@ -59,12 +59,17 @@ class PostsController < ApplicationController
   end
   
   def search
-    puts params[:search_terms]
-    @posts = Array.new()
-    Post.all.each do |pst|
-      if pst.title.downcase.include?(params[:search_terms].downcase) || pst.body.downcase.include?(params[:search_terms].downcase)
-        @posts.push pst
+    if params[:search_terms] != "" && params[:search_terms] != nil
+      @posts = Array.new()
+      Post.all.each do |pst|
+        if pst.title.downcase.include?(params[:search_terms].downcase) || pst.body.downcase.include?(params[:search_terms].downcase)
+          @posts.push pst
+        end
       end
+    else
+      @posts = Post.all
+      flash[:notice] = "No posts were found"
+      render :index
     end
     
     if @posts == nil || @posts.empty?

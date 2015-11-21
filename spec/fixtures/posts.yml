@@ -1,0 +1,11 @@
+test_post:
+    id: 1
+    title: Test Post
+    body: This is only a test
+    thumbnail: testing
+    
+test_post2:
+    id: 2
+    title: Second
+    body: This is the second test
+    thumbnail: NumTwo
