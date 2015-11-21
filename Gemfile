@@ -57,14 +57,9 @@ group :development, :test do
 end
 
 group :test do
-<<<<<<< HEAD
   gem 'rspec-expectations' 
   gem 'cucumber-rails', :require => false
-=======
-  gem 'rspec-expectations'
-  gem 'cucumber-rails' 
   gem 'simplecov', :require => false
->>>>>>> 030116df6061871ac501507251c96146cbec51e4
 end
 
 group :development do
