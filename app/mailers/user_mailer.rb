@@ -9,8 +9,8 @@ class UserMailer < ApplicationMailer
   
   def forgot_password_email(user)
     @user = user
-    #@url = 'http://thawing-woodland-6329.herokuapp.com/'
-    @url = 'https://selt-michael-koscak.c9.io/'
+    @url = 'http://thawing-woodland-6329.herokuapp.com/'
+    #@url = 'https://selt-michael-koscak.c9.io/'
     mail(to: @user.email, subject: 'Link to Reset Password')
   end
   
