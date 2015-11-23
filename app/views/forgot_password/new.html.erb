@@ -1,0 +1,13 @@
+<% provide(:title, 'Reset Password') %>
+<h1>Reset Password</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag forgot_password_path, :method => :post do %>
+      <div class='form-group'>
+        <%= text_field :user, :email, :class => "form-control", :autocomplete=>"on",:type=>"text", :placeholder=>"Email", :autofocus=>"true", :required=>"true" %>
+      </div>
+      <%= submit_tag "Send Reset Link", :class=>"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
