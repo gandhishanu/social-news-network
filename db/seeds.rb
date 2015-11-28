@@ -75,3 +75,20 @@ categories = [{:name=>'Politics', :thumbnail=>'http://buzzybuzz.net/img/thumbnai
 categories.each do |category|
   Category.create!(category)
 end
+
+users = [{id:1, name: "Haider", email: "haider@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: "CslgxcAVLN7wP1FQHjelqQ"}]
+
+users.each do |user|
+  User.create!(user)
+end
+
+
+votes = [{updown: :upvote, user_id: 1, post_id: 1},
+         {updown: :upvote, user_id: 1, post_id: 2},
+         {updown: :downvote, user_id: 1, post_id: 3},
+         {updown: :downvote, user_id: 1, post_id: 4},]
+
+votes.each do |vote|
+  Vote.create!(vote)
+end
+
