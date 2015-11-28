@@ -2,3 +2,7 @@ body {
   background-image: url(background.jpg);
   background-repeat: repeat; 
 }
+
+.voted {
+    color: darkorange;
+}

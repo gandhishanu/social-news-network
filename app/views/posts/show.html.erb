@@ -1,6 +1,11 @@
 <div style="padding:12px;background-color:#FEFEFE;line-height:1.4;">
   <p>
-    <h2><strong><%= @post.title %></strong></h2>
+    <h2>
+      <span class="glyphicon glyphicon-thumbs-up reaction thumbsup-color"></span>
+      <span class=" reaction-number thumbsup-color">10</span>
+      <span class="glyphicon glyphicon-thumbs-down reaction thumbsup-color fa-flip-horizontal"></span> |
+      <strong><%= @post.title %></strong>
+    </h2>
   </p>
   
   <p>
