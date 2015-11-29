@@ -1,6 +1,6 @@
 <div class=media>
   <div class=media-left>
-    <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+    <a href=#> <img class="pull-left img_comments" class=media-object src="<%= image_url "avatars/avatar#{comment.user_id}.png" %>" alt="Generic placeholder image"> </a></div>
   <div class=media-body id="body_comment_<%= comment.id %>">
     <div><strong><%= comment.user.name %></strong></div>
     <div><%= comment.body %></div>
