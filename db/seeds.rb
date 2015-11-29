@@ -86,9 +86,20 @@ end
 votes = [{updown_cd: 0, user_id: 1, post_id: 1},
          {updown_cd: 0, user_id: 1, post_id: 2},
          {updown_cd: 1, user_id: 1, post_id: 3},
-         {updown_cd: 1, user_id: 1, post_id: 4},]
+         {updown_cd: 1, user_id: 1, post_id: 4}]
 
 votes.each do |vote|
   Vote.create!(vote)
+end
+
+comments = [{id: 1, body: "this is commetn 1", user_id: 1},
+            {id: 2, body: "this is commetn 2", user_id: 1},
+            {id: 3, body: "this is commetn 3", user_id: 1},
+            {id: 4, body: "this is commetn 4", user_id: 1},
+            {id: 5, body: "this is commetn 5", user_id: 1},
+            {id: 6, body: "this is commetn 6", user_id: 1}]
+
+comments.each do |comment|
+  Comment.create!(comment)
 end
 
