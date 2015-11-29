@@ -92,12 +92,12 @@ votes.each do |vote|
   Vote.create!(vote)
 end
 
-comments = [{id: 1, body: "this is commetn 1", user_id: 1},
-            {id: 2, body: "this is commetn 2", user_id: 1},
-            {id: 3, body: "this is commetn 3", user_id: 1},
-            {id: 4, body: "this is commetn 4", user_id: 1},
-            {id: 5, body: "this is commetn 5", user_id: 1},
-            {id: 6, body: "this is commetn 6", user_id: 1}]
+comments = [{id: 1, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 2, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 3, user_id: 1, post_id: 1, body: "This is a small comment"},
+            {id: 4, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 5, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 6, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."}]
 
 comments.each do |comment|
   Comment.create!(comment)
