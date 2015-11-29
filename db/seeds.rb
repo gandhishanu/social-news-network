@@ -6,6 +6,29 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+#$("#grid li").each(function(){console.log('<token1>' + $(this).find("h4").text() + '<token2>' + $(this).find("img").attr("src") + "<token3>" + $(this).find("p").text())})
+
+categories = [{:name=>'Politics', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266382yrizaffopt.jpg', :description=>'Check out our hot news from politics. We are here to inform you about everything, wherever you are, whatever your age.'},
+              {:name=>'Bussiness', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301546alfopt.jpg', :description=>'Business publication. business news, trends and profiles. Read our articles and inform about latest trends.'},
+              {:name=>'Technology', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266476ci.jpg', :description=>'Latest news from tech, be in contact with us.'},
+              {:name=>'Entertainment', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442265344girl11opt.jpg', :description=>'Entertainment news, celebrities, celeb news, and celebrity gossip. Check out the hottest fashion, photos, movies.'},
+              {:name=>'Media', :thumbnail=>'http://31.media.tumblr.com/tumblr_lvh3okJPqZ1qa0o0mo1_250.gif', :description=>'Media news, opinion and analysis. Be in contact with us!'},
+              {:name=>'Celebrities', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266120ustin-bieber-pug.jpg', :description=>'Get the latest celebrity news and hot celeb gossip with exclusive stories and pictures about them.'},
+              {:name=>'Sport', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301819ptopt.jpg', :description=>' Be in contact with us and follow latest sport events!'},
+              {:name=>'Fun', :thumbnail=>'http://images.huffingtonpost.com/2015-10-13-1444756294-3245772-IMG_2906-thumb.JPG', :description=>'Funny, weird news… Be in contact with us and find out latest news...'},
+              {:name=>'Travel', :thumbnail=>'http://buzzybuzz.net/img/noimage.jpg', :description=>'Search most famous destination all over the world with us...'},
+              {:name=>'History', :thumbnail=>'http://buzzybuzz.net/img/noimage.jpg', :description=>'Check out interesting history facts...'},
+              {:name=>'Environment', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301072popt.jpg', :description=>'Check out lates news from environment...'},
+              {:name=>'Lifestyle', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442299690tinder-betaopt.jpg', :description=>'Check out the best lifestyle news that we offer'},
+              {:name=>'Chronics', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442300587malopt.jpg', :description=>'Check out latest and dramatic news'},
+              {:name=>'Art', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442298994us-picasso.jpg', :description=>'Best art news from all over the world'},
+              {:name=>'Education', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442265539mt.jpg', :description=>'Education with us - best solution for you'},
+              {:name=>'Animals', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442487917lincoln.jpg', :description=>'world of animals'}]
+
+categories.each do |category|
+  Category.create!(category)
+end
+
 posts = [{:category_id=>1, :title=>'Petition To Rename Australian Currency', :thumbnail=>'http://31.media.tumblr.com/tumblr_lvh3okJPqZ1qa0o0mo1_250.gif', :body=>'An online petition is calling on the Australian government to rename their currency based on a joke from a 1995 episode of The Simpsons.Al...'},
          {:category_id=>2, :title=>'Halloween Then Vs Halloween Now 1', :thumbnail=>'http://images.huffingtonpost.com/2015-10-13-1444756294-3245772-IMG_2906-thumb.JPG', :body=>'Halloween is like a thing now. When I was a kid? It was a thing. But like a really crap thing? It was more aimed at teens that would come and ...'},
          {:category_id=>3, :title=>'The Name of the Windy – DORK TOWER 04.08.15', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442838982fgf.jpg', :body=>'Full comic here...											...'},
@@ -52,29 +75,6 @@ posts.each do |post|
   Post.create!(post)
 end
 
-#$("#grid li").each(function(){console.log('<token1>' + $(this).find("h4").text() + '<token2>' + $(this).find("img").attr("src") + "<token3>" + $(this).find("p").text())})
-
-
-categories = [{:name=>'Politics', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266382yrizaffopt.jpg', :description=>'Check out our hot news from politics. We are here to inform you about everything, wherever you are, whatever your age.'},
-              {:name=>'Bussiness', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301546alfopt.jpg', :description=>'Business publication. business news, trends and profiles. Read our articles and inform about latest trends.'},
-              {:name=>'Technology', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266476ci.jpg', :description=>'Latest news from tech, be in contact with us.'},
-              {:name=>'Entertainment', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442265344girl11opt.jpg', :description=>'Entertainment news, celebrities, celeb news, and celebrity gossip. Check out the hottest fashion, photos, movies.'},
-              {:name=>'Media', :thumbnail=>'http://31.media.tumblr.com/tumblr_lvh3okJPqZ1qa0o0mo1_250.gif', :description=>'Media news, opinion and analysis. Be in contact with us!'},
-              {:name=>'Celebrities', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266120ustin-bieber-pug.jpg', :description=>'Get the latest celebrity news and hot celeb gossip with exclusive stories and pictures about them.'},
-              {:name=>'Sport', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301819ptopt.jpg', :description=>' Be in contact with us and follow latest sport events!'},
-              {:name=>'Fun', :thumbnail=>'http://images.huffingtonpost.com/2015-10-13-1444756294-3245772-IMG_2906-thumb.JPG', :description=>'Funny, weird news… Be in contact with us and find out latest news...'},
-              {:name=>'Travel', :thumbnail=>'http://buzzybuzz.net/img/noimage.jpg', :description=>'Search most famous destination all over the world with us...'},
-              {:name=>'History', :thumbnail=>'http://buzzybuzz.net/img/noimage.jpg', :description=>'Check out interesting history facts...'},
-              {:name=>'Environment', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301072popt.jpg', :description=>'Check out lates news from environment...'},
-              {:name=>'Lifestyle', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442299690tinder-betaopt.jpg', :description=>'Check out the best lifestyle news that we offer'},
-              {:name=>'Chronics', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442300587malopt.jpg', :description=>'Check out latest and dramatic news'},
-              {:name=>'Art', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442298994us-picasso.jpg', :description=>'Best art news from all over the world'},
-              {:name=>'Education', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442265539mt.jpg', :description=>'Education with us - best solution for you'},
-              {:name=>'Animals', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442487917lincoln.jpg', :description=>'world of animals'}]
-
-categories.each do |category|
-  Category.create!(category)
-end
 
 users = [{id:1, name: "Haider", email: "haider@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: "CslgxcAVLN7wP1FQHjelqQ"}]
 
@@ -83,10 +83,10 @@ users.each do |user|
 end
 
 
-votes = [{updown: :upvote, user_id: 1, post_id: 1},
-         {updown: :upvote, user_id: 1, post_id: 2},
-         {updown: :downvote, user_id: 1, post_id: 3},
-         {updown: :downvote, user_id: 1, post_id: 4},]
+votes = [{updown_cd: 0, user_id: 1, post_id: 1},
+         {updown_cd: 0, user_id: 1, post_id: 2},
+         {updown_cd: 1, user_id: 1, post_id: 3},
+         {updown_cd: 1, user_id: 1, post_id: 4},]
 
 votes.each do |vote|
   Vote.create!(vote)
