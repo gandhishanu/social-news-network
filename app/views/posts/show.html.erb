@@ -29,17 +29,22 @@
     <div class=media-left>
       <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
     <div class=media-body>
-      <textarea class="boxsizingBorder" width="100%"></textarea>
-      <input class="btn btn-default" type="submit" value="Submit">
-    </div>
-  </div>
+      <%= form_for(@comment) do |f| %>
+          <% if @comment.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-  <div class=media>
-    <div class=media-left>
-      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-    <div class=media-body><h4 class=media-heading>Media heading</h4>  Cras sit amet nibh libero, in gravida nulla. Nulla
-      vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-      Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                <ul>
+                  <% @comment.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.text_area :body, class: "boxsizingBorder" %>
+            <%= f.submit value: "Post Comment", class: "btn btn-default" %>
+      <% end %>
     </div>
   </div>
 
