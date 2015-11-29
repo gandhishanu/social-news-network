@@ -76,7 +76,10 @@ posts.each do |post|
 end
 
 
-users = [{id:1, name: "Haider", email: "haider@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: "CslgxcAVLN7wP1FQHjelqQ"}]
+users = [{id:1, name: "Haider", email: "haider@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {id:2, name: "Michael", email: "michael@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {id:3, name: "Alex", email: "alex@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {id:4, name: "Shanu", email: "shanu@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64}]
 
 users.each do |user|
   User.create!(user)

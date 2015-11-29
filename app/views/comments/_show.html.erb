@@ -4,6 +4,9 @@
   <div class=media-body id="body_comment_<%= comment.id %>">
     <div><strong><%= comment.user.name %></strong></div>
     <div><%= comment.body %></div>
+    <% if @current_user && @current_user.id == comment.user_id %>
+    <div>(<%= link_to 'Delete',url_for(controller: :comments, action: :destroy, id: comment.id), method: :delete, data: {confirm: "Are you sure?"} %>)</div>
+    <% end %>
   </div>
   <div class=media-body id="edit_comment_<%= comment.id %>" style="display: none">
     <textarea class="boxsizingBorder"><%= comment.body %></textarea>
