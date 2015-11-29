@@ -41,8 +41,6 @@ gem 'bcrypt', '~> 3.1.7'
 #wysiwyg
 gem "wysiwyg-rails", "2.0.0.pre.rc.3"
 
-gem 'simple_enum', '~> 2.0.0'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
