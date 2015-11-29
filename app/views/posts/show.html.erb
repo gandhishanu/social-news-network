@@ -134,6 +134,18 @@
 </div>
 
 <script>
+
+    function edit_comment(id) {
+        $("#body_comment_"+id).hide();
+        $("#edit_comment_"+id).show();
+        return false;
+    }
+    function cancel_btn_action(id) {
+        $("#body_comment_"+id).show();
+        $("#edit_comment_"+id).hide();
+        return false;
+    }
+
     function cast_vote(id, updown) {
 ////        alert(updown);
 //        if ($(id).hasClass("voted")) {
@@ -154,6 +166,14 @@
             });
 //        }
     }
+
+
+  $(document).ready(function(){
     $("#thumb_upvote").click(function(){cast_vote(this, 0);});
     $("#thumb_downvote").click(function(){cast_vote(this, 1);});
+  <% @post.comments.each do |comment| %>
+      $("#edit_link_<%= comment.id %>").click(function(){return edit_comment(<%= comment.id %>);});
+      $("#cancel_btn_<%= comment.id %>").click(function(){return cancel_btn_action(<%= comment.id %>);});
+  <% end %>
+  });
 </script>

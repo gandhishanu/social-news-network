@@ -5,12 +5,15 @@
     <div><strong><%= comment.user.name %></strong></div>
     <div><%= comment.body %></div>
     <% if @current_user && @current_user.id == comment.user_id %>
-    <div>(<%= link_to 'Delete',url_for(controller: :comments, action: :destroy, id: comment.id), method: :delete, data: {confirm: "Are you sure?"} %>)</div>
+    <div>(<a href="#" id="edit_link_<%= comment.id %>">Edit</a> | <%= link_to 'Delete',url_for(controller: :comments, action: :destroy, id: comment.id), method: :delete, data: {confirm: "Are you sure?"} %>)</div>
     <% end %>
   </div>
   <div class=media-body id="edit_comment_<%= comment.id %>" style="display: none">
-    <textarea class="boxsizingBorder"><%= comment.body %></textarea>
-    <input class="btn btn-default" type="submit" value="Update">
-    <input class="btn btn-default" type="submit" value="Cancel">
+    <%= form_for(comment) do |f| %>
+        <%= f.hidden_field :post_id, value: @post.id %>
+        <%= f.text_area :body, class: "boxsizingBorder" %>
+        <%= f.submit value: "Update Comment", class: "btn btn-default" %>
+        <%= f.submit value: "Cancel", class: "btn btn-default", id: "cancel_btn_" + comment.id.to_s %>
+    <% end %>
   </div>
 </div>

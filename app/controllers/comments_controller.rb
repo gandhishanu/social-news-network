@@ -47,12 +47,23 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    if @current_user.nil?
+      flash[:warning] = "You must be logged in to update your comments."
+      return redirect_to request.referrer
+    end
+
+    if @comment.user_id != @current_user.id
+      flash[:warning] = "You can only update your own comments."
+      return redirect_to request.referrer
+    end
+
     respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+      if @comment.update(body: comment_params[:body])
+        format.html { redirect_to request.referrer, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
-        format.html { render :edit }
+        flash[:warning] = 'Cannot make the comment blank.';
+        format.html { redirect_to request.referrer}
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
