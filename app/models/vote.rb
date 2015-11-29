@@ -1,7 +1,7 @@
-require 'simple_enum'
 class Vote < ActiveRecord::Base
-  include SimpleEnum
   belongs_to :post
   belongs_to :user
-  as_enum :updown, upvote: 0, downvote: 1
+  validates :post, presence: true
+  validates :user, presence: true
+  validates :updown_cd, numericality: { only_integer: true, less_than_or_equal_to: 1, greater_than_or_equal_to: 0 }
 end

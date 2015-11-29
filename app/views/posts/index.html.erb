@@ -10,7 +10,7 @@
           <img src="<%= post.thumbnail %>" alt="<%= post.title %>">
           <div class="caption">
             <span class="glyphicon glyphicon-thumbs-up<%= post.is_voted_by_user(@current_user, 0) ? " voted" : "" %>"></span>
-            <span class=" reaction-number thumbsup-color"><%= post.overall_votes %></span>
+            <span><%= post.overall_votes %></span>
             <span class="glyphicon glyphicon-thumbs-down fa-flip-horizontal<%= post.is_voted_by_user(@current_user, 1) ? " voted" : "" %>"></span>
             <h3><%= post.title %></h3>
             <% body = strip_tags(post.body) %>

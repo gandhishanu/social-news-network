@@ -1,9 +1,9 @@
 <div style="padding:12px;background-color:#FEFEFE;line-height:1.4;">
   <p>
     <h2>
-      <span class="glyphicon glyphicon-thumbs-up reaction thumbsup-color"></span>
-      <span class=" reaction-number thumbsup-color">10</span>
-      <span class="glyphicon glyphicon-thumbs-down reaction thumbsup-color fa-flip-horizontal"></span> |
+      <span id="thumb_upvote" class="glyphicon glyphicon-thumbs-up<%= @current_user ? " cursoronhover" : "" %><%= @post.is_voted_by_user(@current_user, 0) ? " voted" : "" %>"></span>
+      <span id="overall_votes"><%= @post.overall_votes %></span>
+      <span id="thumb_downvote" class="glyphicon glyphicon-thumbs-down<%= @current_user ? " cursoronhover" : "" %> fa-flip-horizontal<%= @post.is_voted_by_user(@current_user, 1) ? " voted" : "" %>"></span> |
       <strong><%= @post.title %></strong>
     </h2>
   </p>
@@ -26,3 +26,28 @@
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+
+<script>
+    function cast_vote(id, updown) {
+////        alert(updown);
+//        if ($(id).hasClass("voted")) {
+//            alert("You have already casted the vote.");
+//        } else {
+            $.ajax({
+                method: "GET",
+                url: "/cast_vote",
+                data: { post_id: <%= @post.id %>, updown: updown }
+            })
+            .done(function( msg ) {
+                $("#thumb_upvote").removeClass("voted");
+                $("#thumb_downvote").removeClass("voted");
+                msg = JSON.parse(msg);
+                        if (msg.vote_casted==0) $("#thumb_upvote").addClass("voted");
+                        else if (msg.vote_casted==1) $("#thumb_downvote").addClass("voted");
+                        $("#overall_votes").text(msg.overall_votes);
+            });
+//        }
+    }
+    $("#thumb_upvote").click(function(){cast_vote(this, 0);});
+    $("#thumb_downvote").click(function(){cast_vote(this, 1);});
+</script>
