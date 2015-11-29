@@ -76,7 +76,10 @@ posts.each do |post|
 end
 
 
-users = [{id:1, name: "Haider", email: "haider@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: "CslgxcAVLN7wP1FQHjelqQ"}]
+users = [{id:1, name: "Haider", email: "haider@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {id:2, name: "Michael", email: "michael@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {id:3, name: "Alex", email: "alex@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {id:4, name: "Shanu", email: "shanu@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64}]
 
 users.each do |user|
   User.create!(user)
@@ -86,9 +89,20 @@ end
 votes = [{updown_cd: 0, user_id: 1, post_id: 1},
          {updown_cd: 0, user_id: 1, post_id: 2},
          {updown_cd: 1, user_id: 1, post_id: 3},
-         {updown_cd: 1, user_id: 1, post_id: 4},]
+         {updown_cd: 1, user_id: 1, post_id: 4}]
 
 votes.each do |vote|
   Vote.create!(vote)
+end
+
+comments = [{id: 1, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 2, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 3, user_id: 1, post_id: 1, body: "This is a small comment"},
+            {id: 4, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 5, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {id: 6, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."}]
+
+comments.each do |comment|
+  Comment.create!(comment)
 end
 

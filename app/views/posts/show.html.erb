@@ -21,13 +21,131 @@
   <p>
     <%= @post.body.gsub("fr-video ", "").html_safe %>
   </p>
-  
-</div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
 
+  <div class=media>
+    <div class=media-left>
+      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+    <div class=media-body>
+      <%= form_for(@comment) do |f| %>
+          <% if @comment.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+                <ul>
+                  <% @comment.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.text_area :body, class: "boxsizingBorder" %>
+            <%= f.submit value: "Post Comment", class: "btn btn-default" %>
+      <% end %>
+    </div>
+  </div>
+
+  <% @post.comments.each do |comment| %>
+  <%= render partial: "comments/show", locals: {comment: comment} %>
+  <% end %>
+ <!--
+
+<div class=media>
+  <div class=media-left>
+    <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+  <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla
+    vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+    Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+    <div class=media>
+      <div class=media-left>
+        <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+      <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
+        nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
+        tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
+        faucibus.
+      </div>
+    </div>
+    <div class=media>
+      <div class=media-left>
+        <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+      <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
+        nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
+        tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
+        faucibus.
+      </div>
+    </div>
+    <div class=media>
+      <div class=media-left>
+        <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+      <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
+        nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
+        tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
+        faucibus.
+
+
+        <div class=media>
+          <div class=media-left>
+            <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+          <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
+            nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
+            tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
+            faucibus.
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+  <div class=media>
+    <div class=media-left>
+      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit
+    </div>
+  </div>
+  <div class=media>
+    <div class=media-left>
+      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit
+    </div>
+  </div>
+  <div class=media>
+    <div class=media-left>
+      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit
+    </div>
+  </div>
+  <div class=media>
+    <div class=media-left>
+      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
+    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sitCras sitCras sitCras sitCras sitCras sit
+      Cras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kas
+      Cras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kas
+      Cras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kas
+
+    </div>
+  </div>
+-->
+
+</div>
+
 <script>
+
+    function edit_comment(id) {
+        $("#body_comment_"+id).hide();
+        $("#edit_comment_"+id).show();
+        return false;
+    }
+    function cancel_btn_action(id) {
+        $("#body_comment_"+id).show();
+        $("#edit_comment_"+id).hide();
+        return false;
+    }
+
     function cast_vote(id, updown) {
 ////        alert(updown);
 //        if ($(id).hasClass("voted")) {
@@ -48,6 +166,14 @@
             });
 //        }
     }
+
+
+  $(document).ready(function(){
     $("#thumb_upvote").click(function(){cast_vote(this, 0);});
     $("#thumb_downvote").click(function(){cast_vote(this, 1);});
+  <% @post.comments.each do |comment| %>
+      $("#edit_link_<%= comment.id %>").click(function(){return edit_comment(<%= comment.id %>);});
+      $("#cancel_btn_<%= comment.id %>").click(function(){return cancel_btn_action(<%= comment.id %>);});
+  <% end %>
+  });
 </script>
