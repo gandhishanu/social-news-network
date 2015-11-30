@@ -21,16 +21,14 @@
   <p>
     <%= @post.body.gsub("fr-video ", "").html_safe %>
   </p>
-<<<<<<< HEAD
+
   
   <p>
 <a href="<%= url_for flagpost_path id: @post.id %>"> <%= submit_tag "flag", :class=>"btn btn-primary" %></a> 
     
   </p>
 </div>
-=======
 
->>>>>>> 5364f3094a0c6430604347214090093ac9da0215
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
 

@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151130013126) do
-=======
-ActiveRecord::Schema.define(version: 20151129184640) do
->>>>>>> 5364f3094a0c6430604347214090093ac9da0215
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"

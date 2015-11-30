@@ -1,17 +1,17 @@
 class User < ActiveRecord::Base
   
-<<<<<<< HEAD
+
     #attr_accessible :user_id, :name, :email
   
     has_many :authorizations
-=======
+
   has_secure_password  	
 
   has_many :votes
   has_many :comments
   has_many :authorizations
   validates :name, :email, :presence => true
->>>>>>> 5364f3094a0c6430604347214090093ac9da0215
+
     
     #before_save { self.email = email.downcase }
     #validates :user_id, presence: true, length: { maximum: 50 }
