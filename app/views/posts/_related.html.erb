@@ -1,10 +1,10 @@
 <div class="media">
+  <a href="<%= url_for post_path id: post.id %>">
   <div class="media-left">
-    <a href=#>
       <img class="pull-left img_related" class="media-object" src="<%= image_url post.thumbnail.html_safe %>">
-    </a>
   </div>
   <div class="media-body">
     <strong><%= post.title %></strong>
   </div>
+  </a>
 </div>

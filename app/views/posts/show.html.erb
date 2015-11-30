@@ -55,7 +55,7 @@
       <% if @post.related_posts.count == 0 %>
       No related posts.
       <% else %>
-        <% @post.related_posts.each do |post| %>
+        <% @post.related_posts.take(10).each do |post| %>
           <%= render :partial => "related", locals: {post: post} %>
         <% end %>
       <% end %>
