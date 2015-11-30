@@ -37,10 +37,12 @@ describe PostsController do
 =end
     describe 'index method' do
         it 'should set the posts variable to all the posts' do
-            #expect(Post).to receive(:all).and_return("GoodPost")
-            #post :index
-            #expect(assigns(:posts)).to eq "GoodPost"
-            #expect(response).to render_template('index')
+            expect(Post).to receive(:where).and_return("GoodPost")
+            #fake_params = double("fakePost")
+            #expect(fake_params).to receive(:permit).and_return("all")
+            post :index, :category_id => 3
+            expect(assigns(:posts)).to eq "GoodPost"
+            expect(response).to render_template('index')
         end
     end
     describe 'new method' do
@@ -51,10 +53,14 @@ describe PostsController do
     end
     describe 'create method' do
         it 'should save the post with the parameters given' do
-            fake_post = double('post1')
+            #fake_post = double('post1')
+            #fake_post2 = double('post2')
             #expect(Post).to receive(:new).and_return(fake_post)
             #expect(fake_post).to receive(:save).and_return(true)
-            #post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
+            #expect(fake_post).to receive(:to_model).and_return(fake_post2)
+            #expect(fake_post2).to receive(:persisted?)
+            post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
+            expect(flash[:notice]).to eq "Post was successfully created."
             #expect(response).to redirect_to(fake_post) #make fake post respond to the redirect_to - first check
             #redirect to is wrapped in a url
         end
