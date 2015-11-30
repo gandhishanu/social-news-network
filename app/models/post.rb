@@ -2,6 +2,8 @@ class Post < ActiveRecord::Base
   belongs_to :category
   has_many :votes
   has_many :comments
+  has_many :relateds, foreign_key: :post_id1
+  has_many :related_posts, through: :relateds, source: :related_post2
 
   def overall_votes
     upvotes = votes.where(updown_cd: 0).count
