@@ -108,3 +108,16 @@ comments.each do |comment|
   Comment.create!(comment)
 end
 
+relateds = [{post_id1: 1, post_id2: 2, frequency: 1},
+            {post_id1: 1, post_id2: 3, frequency: 1},
+            {post_id1: 1, post_id2: 4, frequency: 1},
+            {post_id1: 2, post_id2: 5, frequency: 1},
+            {post_id1: 2, post_id2: 6, frequency: 1},
+            {post_id1: 2, post_id2: 7, frequency: 1},
+            {post_id1: 2, post_id2: 8, frequency: 1},
+            {post_id1: 3, post_id2: 9, frequency: 1}]
+
+relateds.each do |related|
+  Related.create!(related)
+end
+
