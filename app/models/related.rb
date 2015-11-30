@@ -10,8 +10,8 @@ class Related < ActiveRecord::Base
             pst1_id,
             pst2_id,
             count(*) freq,
-            "2010-01-01 00:00:00",
-            "2010-01-01 00:00:00"
+            \'2010-01-01 00:00:00\',
+            \'2010-01-01 00:00:00\'
           FROM
           (
             SELECT
