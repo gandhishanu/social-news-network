@@ -2,3 +2,25 @@ body {
   background-image: url(background.jpg);
   background-repeat: repeat; 
 }
+
+.voted {
+    color: darkorange;
+}
+
+.cursoronhover {
+    cursor: pointer;
+}
+
+.img_comments {
+    width: 74px;
+    height: 64px;
+    padding-right: 10px;
+}
+
+.boxsizingBorder {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 64px;
+}

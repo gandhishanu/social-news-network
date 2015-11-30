@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   
   
+  resources :comments
   resources :categories
   resources :posts
   resources :users
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
   root :to => "posts#index"
   
   get '/search', :to => 'posts#search'
+
+  get '/cast_vote', to: 'votes#cast_vote'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151130013126) do
+=======
+ActiveRecord::Schema.define(version: 20151129184640) do
+>>>>>>> 5364f3094a0c6430604347214090093ac9da0215
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -28,6 +32,15 @@ ActiveRecord::Schema.define(version: 20151130013126) do
     t.datetime "updated_at",  null: false
     t.string   "description"
     t.text     "thumbnail"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -51,6 +64,14 @@ ActiveRecord::Schema.define(version: 20151130013126) do
     t.string   "password_digest"
     t.boolean  "email_confirmed",      default: false, null: false
     t.string   "email_confirm_string"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "updown_cd"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

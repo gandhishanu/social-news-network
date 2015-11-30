@@ -1,6 +1,11 @@
 <div style="padding:12px;background-color:#FEFEFE;line-height:1.4;">
   <p>
-    <h2><strong><%= @post.title %></strong></h2>
+    <h2>
+      <span id="thumb_upvote" class="glyphicon glyphicon-thumbs-up<%= @current_user ? " cursoronhover" : "" %><%= @post.is_voted_by_user(@current_user, 0) ? " voted" : "" %>"></span>
+      <span id="overall_votes"><%= @post.overall_votes %></span>
+      <span id="thumb_downvote" class="glyphicon glyphicon-thumbs-down<%= @current_user ? " cursoronhover" : "" %> fa-flip-horizontal<%= @post.is_voted_by_user(@current_user, 1) ? " voted" : "" %>"></span> |
+      <strong><%= @post.title %></strong>
+    </h2>
   </p>
   
   <p>
@@ -16,11 +21,86 @@
   <p>
     <%= @post.body.gsub("fr-video ", "").html_safe %>
   </p>
+<<<<<<< HEAD
   
   <p>
 <a href="<%= url_for flagpost_path id: @post.id %>"> <%= submit_tag "flag", :class=>"btn btn-primary" %></a> 
     
   </p>
 </div>
+=======
+
+>>>>>>> 5364f3094a0c6430604347214090093ac9da0215
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+
+  <% if @current_user %>
+      <%
+         comment = Comment.new
+         comment.post_id = @post.id
+      %>
+      <%= render partial: "comments/form", locals: {comment: comment} %>
+  <% end %>
+
+  <% @post.comments.where(comment_id: nil).each do |comment| %>
+  <%= render partial: "comments/show", locals: {comment: comment} %>
+  <% end %>
+
+
+
+</div>
+
+<script>
+
+    function edit_comment(id) {
+        $("#body_comment_"+id).hide();
+        $("#edit_comment_"+id).show();
+        return false;
+    }
+    function cancel_btn_action(id) {
+        $("#body_comment_"+id).show();
+        $("#edit_comment_"+id).hide();
+        return false;
+    }
+    function reply_comment(id) {
+        $("#post_reply_"+id).show();
+        return false;
+    }
+    function cancel_reply_btn_action(id) {
+        $("#post_reply_"+id).hide();
+        return false;
+    }
+
+    function cast_vote(id, updown) {
+////        alert(updown);
+//        if ($(id).hasClass("voted")) {
+//            alert("You have already casted the vote.");
+//        } else {
+            $.ajax({
+                method: "GET",
+                url: "/cast_vote",
+                data: { post_id: <%= @post.id %>, updown: updown }
+            })
+            .done(function( msg ) {
+                $("#thumb_upvote").removeClass("voted");
+                $("#thumb_downvote").removeClass("voted");
+                msg = JSON.parse(msg);
+                        if (msg.vote_casted==0) $("#thumb_upvote").addClass("voted");
+                        else if (msg.vote_casted==1) $("#thumb_downvote").addClass("voted");
+                        $("#overall_votes").text(msg.overall_votes);
+            });
+//        }
+    }
+
+
+  $(document).ready(function(){
+    $("#thumb_upvote").click(function(){cast_vote(this, 0);});
+    $("#thumb_downvote").click(function(){cast_vote(this, 1);});
+  <% @post.comments.each do |comment| %>
+      $("#edit_link_<%= comment.id %>").click(function(){return edit_comment(<%= comment.id %>);});
+      $("#cancel_btn_<%= comment.id %>").click(function(){return cancel_btn_action(<%= comment.id %>);});
+      $("#reply_link_<%= comment.id %>").click(function(){return reply_comment(<%= comment.id %>);});
+      $("#cancel_reply_btn_<%= comment.id %>").click(function(){return cancel_reply_btn_action(<%= comment.id %>);});
+  <% end %>
+  });
+</script>

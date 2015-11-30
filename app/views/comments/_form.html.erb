@@ -1,0 +1,17 @@
+<div class=media>
+  <div class=media-left>
+    <a href=#> <img class="pull-left img_comments" class=media-object src="<%= image_url "avatars/avatar#{@current_user.id}.png" %>" alt="Generic placeholder image"> </a></div>
+  <div class=media-body>
+    <%= form_for(comment) do |f| %>
+        <%= f.hidden_field :post_id %>
+        <%= f.hidden_field :comment_id %>
+        <%= f.text_area :body, class: "boxsizingBorder" %>
+        <% if comment.comment_id %>
+            <%= f.submit value: "Post Reply", class: "btn btn-default" %>
+            <%= f.submit value: "Cancel", class: "btn btn-default", id: "cancel_reply_btn_" + comment.comment_id.to_s %>
+        <% else %>
+            <%= f.submit value: "Post Comment", class: "btn btn-default" %>
+        <% end %>
+    <% end %>
+  </div>
+</div>
