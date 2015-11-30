@@ -9,15 +9,10 @@ describe User do
 				expect(User.where(:name => "michael").count > 0)
 			end
 		end
-    	#context 'Create User with Facebook' do
-	    #  it 'should create a user using facebook if user does not exist' do
-	    #    @user2.save!
-	    #    expect(User.where(:name => "mock_user", :sesion_token => "mock_token").count > 0)
-		#    end
-	    #  it 'should return the same user if one exists' do
-	    #    user = User.omniauth(mock_auth_hash)
-	    #    expect(user).to eq(@user2)
-		#    end
-	    #end
+		#context 'Create a user using facebook' do
+			#it 'should create an authorization and an omniauth user' do
+				#Authorization
+			#end
+		#end
   	end
 end

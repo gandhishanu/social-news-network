@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
 		user	=	User.find_by_email(params[:user][:email])	
 		if	user && user.authenticate( params[:user][:password] )
 			if user.email_confirmed
-			  puts("LOLOLOLOLOLOLOLOLLOLOLOLOLOLO")
 			  session[:session_token]=	user.session_token
 			else
 			  flash[:warning] = 'Please confirm your email before logging in.'
@@ -21,7 +20,12 @@ class SessionsController < ApplicationController
   def create_omniauth
     auth_hash = request.env['omniauth.auth']
     if session[:session_token]
-      User.find_by_session_token(session[:session_token]).add_provider(auth_hash)
+      if(User.find_by_session_token(session[:session_token]))
+        User.find_by_session_token(session[:session_token]).add_provider(auth_hash)
+      else
+        flash[:warning] = "Error. Please try again"
+        session[:session_token] = nil
+      end
     else
       auth = Authorization.find_or_create(auth_hash)
       session[:session_token] = auth.session_token
