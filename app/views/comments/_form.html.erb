@@ -1,29 +1,17 @@
-<%= form_for(@comment) do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-      <% @comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
+<div class=media>
+  <div class=media-left>
+    <a href=#> <img class="pull-left img_comments" class=media-object src="<%= image_url "avatars/avatar#{@current_user.id}.png" %>" alt="Generic placeholder image"> </a></div>
+  <div class=media-body>
+    <%= form_for(comment) do |f| %>
+        <%= f.hidden_field :post_id %>
+        <%= f.hidden_field :comment_id %>
+        <%= f.text_area :body, class: "boxsizingBorder" %>
+        <% if comment.comment_id %>
+            <%= f.submit value: "Post Reply", class: "btn btn-default" %>
+            <%= f.submit value: "Cancel", class: "btn btn-default", id: "cancel_reply_btn_" + comment.comment_id.to_s %>
+        <% else %>
+            <%= f.submit value: "Post Comment", class: "btn btn-default" %>
+        <% end %>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :comment_id %><br>
-    <%= f.number_field :comment_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

@@ -26,28 +26,11 @@
 <%= link_to 'Back', posts_path %>
 
   <% if @current_user %>
-  <div class=media>
-    <div class=media-left>
-      <a href=#> <img class="pull-left img_comments" class=media-object src="<%= image_url "avatars/avatar#{@current_user.id}.png" %>" alt="Generic placeholder image"> </a></div>
-    <div class=media-body>
-      <%= form_for(@comment) do |f| %>
-          <% if @comment.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-                <ul>
-                  <% @comment.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
-          <% end %>
-            <%= f.hidden_field :post_id, value: @post.id %>
-            <%= f.text_area :body, class: "boxsizingBorder" %>
-            <%= f.submit value: "Post Comment", class: "btn btn-default" %>
-      <% end %>
-    </div>
-  </div>
+      <%
+         comment = Comment.new
+         comment.post_id = @post.id
+      %>
+      <%= render partial: "comments/form", locals: {comment: comment} %>
   <% end %>
 
   <% @post.comments.where(comment_id: nil).each do |comment| %>
@@ -68,6 +51,14 @@
     function cancel_btn_action(id) {
         $("#body_comment_"+id).show();
         $("#edit_comment_"+id).hide();
+        return false;
+    }
+    function reply_comment(id) {
+        $("#post_reply_"+id).show();
+        return false;
+    }
+    function cancel_reply_btn_action(id) {
+        $("#post_reply_"+id).hide();
         return false;
     }
 
@@ -99,6 +90,8 @@
   <% @post.comments.each do |comment| %>
       $("#edit_link_<%= comment.id %>").click(function(){return edit_comment(<%= comment.id %>);});
       $("#cancel_btn_<%= comment.id %>").click(function(){return cancel_btn_action(<%= comment.id %>);});
+      $("#reply_link_<%= comment.id %>").click(function(){return reply_comment(<%= comment.id %>);});
+      $("#cancel_reply_btn_<%= comment.id %>").click(function(){return cancel_reply_btn_action(<%= comment.id %>);});
   <% end %>
   });
 </script>
