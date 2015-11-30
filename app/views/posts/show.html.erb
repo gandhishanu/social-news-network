@@ -50,88 +50,11 @@
   </div>
   <% end %>
 
-  <% @post.comments.each do |comment| %>
+  <% @post.comments.where(comment_id: nil).each do |comment| %>
   <%= render partial: "comments/show", locals: {comment: comment} %>
   <% end %>
- <!--
-
-<div class=media>
-  <div class=media-left>
-    <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-  <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla
-    vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-    Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-    <div class=media>
-      <div class=media-left>
-        <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-      <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
-        nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-        tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-        faucibus.
-      </div>
-    </div>
-    <div class=media>
-      <div class=media-left>
-        <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-      <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
-        nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-        tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-        faucibus.
-      </div>
-    </div>
-    <div class=media>
-      <div class=media-left>
-        <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-      <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
-        nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-        tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-        faucibus.
 
 
-        <div class=media>
-          <div class=media-left>
-            <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-          <div class=media-body><h4 class=media-heading>Nested media heading</h4> Cras sit amet nibh libero, in gravida
-            nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-            tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-            faucibus.
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-  <div class=media>
-    <div class=media-left>
-      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit
-    </div>
-  </div>
-  <div class=media>
-    <div class=media-left>
-      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit
-    </div>
-  </div>
-  <div class=media>
-    <div class=media-left>
-      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sit
-    </div>
-  </div>
-  <div class=media>
-    <div class=media-left>
-      <a href=#> <img class="pull-left img_comments" class=media-object src="http://myweb.uiowa.edu/hhameed/img/avatar.jpg" alt="Generic placeholder image"> </a></div>
-    <div class=media-body><h4 class=media-heading>Media heading</h4> Cras sitCras sitCras sitCras sitCras sitCras sit
-      Cras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kas
-      Cras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kas
-      Cras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kasCras sit aksdjk asdkjfkasj fkajsdkfjsakdf lkasd fka sdkfj askdf kas dfk akfd aks fdklsa fk dsakfd kas
-
-    </div>
-  </div>
--->
 
 </div>
 

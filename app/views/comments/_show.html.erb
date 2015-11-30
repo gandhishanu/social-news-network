@@ -1,19 +1,30 @@
 <div class=media>
   <div class=media-left>
-    <a href=#> <img class="pull-left img_comments" class=media-object src="<%= image_url "avatars/avatar#{comment.user_id}.png" %>" alt="Generic placeholder image"> </a></div>
-  <div class=media-body id="body_comment_<%= comment.id %>">
-    <div><strong><%= comment.user.name %></strong></div>
-    <div><%= comment.body %></div>
-    <% if @current_user && @current_user.id == comment.user_id %>
-    <div>(<a href="#" id="edit_link_<%= comment.id %>">Edit</a> | <%= link_to 'Delete',url_for(controller: :comments, action: :destroy, id: comment.id), method: :delete, data: {confirm: "Are you sure?"} %>)</div>
-    <% end %>
+    <a href=#>
+      <img class="pull-left img_comments" class=media-object src="<%= image_url "avatars/avatar#{comment.user_id}.png" %>" alt="Generic placeholder image">
+    </a>
   </div>
-  <div class=media-body id="edit_comment_<%= comment.id %>" style="display: none">
-    <%= form_for(comment) do |f| %>
-        <%= f.hidden_field :post_id, value: @post.id %>
-        <%= f.text_area :body, class: "boxsizingBorder" %>
-        <%= f.submit value: "Update Comment", class: "btn btn-default" %>
-        <%= f.submit value: "Cancel", class: "btn btn-default", id: "cancel_btn_" + comment.id.to_s %>
+  <div class=media-body>
+    <div id="body_comment_<%= comment.id %>">
+      <div><strong><%= comment.user.name %></strong></div>
+      <div><%= comment.body %></div>
+      <% if @current_user && @current_user.id == comment.user_id %>
+          <div>(<a href="#" id="edit_link_<%= comment.id %>">Edit</a>
+            | <%= link_to 'Delete', url_for(controller: :comments, action: :destroy, id: comment.id), method: :delete, data: {confirm: "Are you sure?"} %>
+            )
+          </div>
+      <% end %>
+    </div>
+    <div id="edit_comment_<%= comment.id %>" style="display: none">
+      <%= form_for(comment) do |f| %>
+          <%= f.hidden_field :post_id, value: @post.id %>
+          <%= f.text_area :body, class: "boxsizingBorder" %>
+          <%= f.submit value: "Update Comment", class: "btn btn-default" %>
+          <%= f.submit value: "Cancel", class: "btn btn-default", id: "cancel_btn_" + comment.id.to_s %>
+      <% end %>
+    </div>
+    <% comment.replies.each do |reply| %>
+        <%= render partial: "comments/show", locals: {comment: reply} %>
     <% end %>
   </div>
 </div>
