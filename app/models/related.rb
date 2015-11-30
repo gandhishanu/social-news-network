@@ -3,7 +3,7 @@ class Related < ActiveRecord::Base
   belongs_to :related_post2, foreign_key: :post_id2, class_name: :Post
 
   def self.update_relations
-    ActiveRecord::Base.connection.execute('DELETE FROM relateds WHERE 1')
+    ActiveRecord::Base.connection.execute('DELETE FROM relateds')
     sql = '
     			INSERT INTO relateds(post_id1, post_id2, frequency, created_at, updated_at)
           SELECT
