@@ -76,10 +76,10 @@ posts.each do |post|
 end
 
 
-users = [{id:1, name: "Ali", email: "ali@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
-         {id:2, name: "John", email: "john@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
-         {id:3, name: "Sam", email: "sam@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
-         {id:4, name: "Raj", email: "raj@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64}]
+users = [{name: "Ali", email: "ali@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {name: "John", email: "john@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {name: "Sam", email: "sam@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64},
+         {name: "Raj", email: "raj@uiowa.edu", password: "abcdef", email_confirmed: "t", session_token: SecureRandom.urlsafe_base64}]
 
 users.each do |user|
   User.create!(user)
@@ -95,12 +95,12 @@ votes.each do |vote|
   Vote.create!(vote)
 end
 
-comments = [{id: 1, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {id: 2, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {id: 3, user_id: 1, post_id: 1, body: "This is a small comment"},
-            {id: 4, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {id: 5, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {id: 6, user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."}]
+comments = [{user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 1, body: "This is a small comment"},
+            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."}]
 
 comments.each do |comment|
   Comment.create!(comment)
