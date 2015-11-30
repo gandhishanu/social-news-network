@@ -1,4 +1,4 @@
-<div style="padding:12px;background-color:#FEFEFE;line-height:1.4;">
+<div class="col-lg-9" style="padding:12px;background-color:#FEFEFE;line-height:1.4;">
   <p>
     <h2>
       <span id="thumb_upvote" class="glyphicon glyphicon-thumbs-up<%= @current_user ? " cursoronhover" : "" %><%= @post.is_voted_by_user(@current_user, 0) ? " voted" : "" %>"></span>
@@ -45,6 +45,22 @@
 
 
 
+</div>
+<div class="col-lg-3">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Related Posts</h3>
+    </div>
+    <div class="panel-body">
+      <% if @post.related_posts.count == 0 %>
+      No related posts.
+      <% else %>
+        <% @post.related_posts.each do |post| %>
+          <%= render :partial => "related", locals: {post: post} %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <script>

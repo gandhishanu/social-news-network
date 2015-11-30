@@ -17,6 +17,11 @@ body {
     padding-right: 10px;
 }
 
+.img_related {
+    width: 74px;
+    padding-right: 10px;
+}
+
 .boxsizingBorder {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
