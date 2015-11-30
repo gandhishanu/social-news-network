@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120050224) do
+ActiveRecord::Schema.define(version: 20151130013126) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20151120050224) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
+    t.boolean  "flagpost"
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"

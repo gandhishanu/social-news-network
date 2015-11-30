@@ -78,6 +78,14 @@ class PostsController < ApplicationController
       render :index
     end
   end
+  
+  def flagpost
+     @post = Post.find(params[:id])
+    @post.flagpost=true
+    @post.save
+     flash[:success] = "post was flagged"
+   redirect_to post_path id:@post.id
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

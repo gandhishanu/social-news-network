@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
+
+  
   
   resources :categories
   resources :posts
   resources :users
   #resources :forgot_password
+  
+  
   
   get '/signup'  => 'users#new'
   get '/reset_password'  => 'forgot_password#update'
@@ -14,11 +18,12 @@ Rails.application.routes.draw do
   match '/login', to: 'sessions#new', via: :get
   get '/auth/:provider/callback', :to => 'sessions#create_omniauth'
   get '/auth/failure', :to => 'sessions#failure'
+  get '/showprofile' => 'users#show'
   
   match '/users/validate/:id/:email_confirm_string', to: 'users#validate_from_email', via: :get
   match '/users/pwr/:id/:email_confirm_string', to: 'forgot_password#reset_password', via: :get
   match '/forgot_password.:id', to: 'forgot_password#update', via: :patch
-
+  get '/flagpost', to: 'posts#flagpost'
   #match 'forgot_password', to: 'forgot_password#send_email'
 
   get '/logout', :to => 'sessions#destroy'
