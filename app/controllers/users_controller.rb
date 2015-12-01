@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   
   def show
  #  @current_user = User.find_by(params:[:name])
-end
+  end
+  
   def edit
     @user = User.find(params[:id])
   end
