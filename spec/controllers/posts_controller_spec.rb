@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe PostsController do
-    fixtures :posts
+
 =begin
     describe 'searching TMDb' do
         it 'should check for invalid search terms' do
@@ -73,6 +73,7 @@ describe PostsController do
         end
     end
     describe 'searching posts' do
+        fixtures :posts
         it 'should check for blank search terms' do
             post :search,  {:search_terms => ""}
             expect(response).to_not render_template('search')
@@ -82,16 +83,26 @@ describe PostsController do
             expect(response).to_not render_template('search')
         end
         it 'should go to the homepage if no movies were found' do
-            #expect(Post).to receive(:all).and_return(posts(:test_post), posts(:test_post2))
-            #post :search, {:search_terms => "SELT"}
-            #expect(response).to_not render_template('search')
-            #expect(response).to render_template('posts/index')
+            testPost = posts(:test_post)
+            testPost2 = posts(:test_post2)
+            testArray = Array.new
+            testArray.push(testPost)
+            testArray.push(testPost2)
+            expect(Post).to receive(:all).and_return(testArray).twice#(:test_post), posts(:test_post2))
+            post :search, {:search_terms => "SELT"}
+            expect(response).to_not render_template('search')
+            expect(response).to render_template('posts/index')
         end
         describe 'after valid search' do
             it 'should select the Search Results template for rendering' do
-                #expect(Post).to receive(:all).and_return(posts(:test_post), posts(:test_post2))
-                #post :search, {:search_terms => 'post'}
-                #expect(response).to render_template('posts/search')
+                testPost = posts(:test_post)
+                testPost2 = posts(:test_post2)
+                testArray = Array.new
+                testArray.push(testPost)
+                testArray.push(testPost2)
+                expect(Post).to receive(:all).and_return(testArray)
+                post :search, {:search_terms => 'test'}
+                expect(response).to render_template('posts/search')
             end
             it 'should make the TMDb search results available to that template' do
                 assigns(:posts).should == @fake_post
