@@ -6,11 +6,7 @@ class UsersController < ApplicationController
   end
   
   def show
- #  @current_user = User.find_by(params:[:name])
-  end
-  
-  def edit
-    @user = User.find(params[:id])
+   @current_user = User.find(params[:id])
   end
      
   def create
@@ -44,6 +40,13 @@ class UsersController < ApplicationController
       redirect_to login_path
     end
   end
+  
+  def edit
+    @user=User.find(params[:id])
+    
+    
+  end
+  
   
   
   private
