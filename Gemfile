@@ -54,6 +54,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
 end
 
 group :test do

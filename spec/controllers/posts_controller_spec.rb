@@ -110,11 +110,69 @@ describe PostsController do
         end
     end
     describe 'destroy method' do
+        fixtures :posts
         it 'should destroy the selected post and redirect back to the homepage' do
             @post_toDelete = posts(:test_post)
             expect(@post_toDelete).to receive(:destroy)
             @post_toDelete.destroy
             expect(response.status).to eq(200)
+        end
+    end
+=begin    describe 'update method' do
+        fixtures :posts
+        describe "PATCH #update" do
+          context "with good data" do
+            it "updates the wallet and redirects" do
+              patch :update, id: @post.id, post: { title: "xyz", body: "testing", thumbnail: "202"}
+              expect(response).to be_redirect
+            end
+          end
+          context "with bad data" do
+            it "does not change the wallet, and re-renders the form" do
+              patch :update, id: @post.id, post: { title: "xyz", body: "testing"}
+              expect(response).not_to be_redirect
+            end
+          end
+        end
+        describe 'update successfully' do
+            it 'should load the html page if specfied' do
+                #testPost = posts(:test_post)
+                #expect(testPost).to receive(update).and_return(true)
+                #testPost.update
+                my_model = stub_model(Post,:update=>true)
+                Post.stub(:update).with({:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}) { my_model }
+                post :update, :my_model => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}, :format => :json
+                #response.body.should == my_model.to_json
+                response.header['Content-Type'].should include 'application/json'
+            end
+            it 'should load the xml page if specified' do
+                testPost = posts(:test_post)
+                expect(testPost).to receive(update).and_return(true)
+                testPost.update
+            end
+        end
+        describe 'not updated sucessfully' do 
+            it 'should load the html page if specfied' do
+                testPost = posts(:test_post)
+                expect(testPost).to receive(update).and_return(false)
+                testPost.update
+            end
+            it 'should load the xml page if specified' do
+                testPost = posts(:test_post)
+                expect(testPost).to receive(update).and_return(fals)
+                testPost.update
+            end
+        end
+=end    end
+    describe 'flagpost method' do
+        fixtures :posts
+        it 'should flag the post and then send the user back to the homepage' do
+            testPost = posts(:test_post)
+            expect(posts(:test_post)).to receive(:save)
+            expect(Post).to receive(:find).and_return(testPost)
+            post :flagpost, {:params => {:id => 1}}
+            expect(testPost[:flagpost]).to eq true
+            #expect(response).to redirect_to(post_path) #render_template('posts/search')
         end
     end
 end

@@ -81,7 +81,7 @@ class PostsController < ApplicationController
   end
   
   def flagpost
-     @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
     @post.flagpost=true
     @post.save
      flash[:success] = "post was flagged"
