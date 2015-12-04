@@ -4,8 +4,8 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.string :thumbnail
-
       t.timestamps null: false
+      t.references :user
     end
   end
 end

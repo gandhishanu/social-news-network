@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :category
+  belongs_to :user
   has_many :votes
   has_many :comments
   has_many :relateds, foreign_key: :post_id1

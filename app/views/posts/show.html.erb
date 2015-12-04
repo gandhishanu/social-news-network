@@ -30,7 +30,9 @@
 
 <div class="fb-share-button" data-href="<%= post_url id:@post.id %>" data-layout="button"></div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<% if @current_user %>
+  <% if  @current_user.id == @post.user_id %><%= link_to 'Edit', edit_post_path(@post) %> | <% end %>
+<% end %>
 <%= link_to 'Back', posts_path %>
 
   <% if @current_user %>

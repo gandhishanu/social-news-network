@@ -20,12 +20,16 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    if @current_user.id != @post.user_id
+      redirect_to post_path id:@post.id
+    end
   end
 
   # POST /posts
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user_id = @current_user.id
 
     if @post.save
       flash[:notice] = 'Post was successfully created.'
@@ -39,6 +43,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
+      #might have to add user ID
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
@@ -96,6 +101,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :thumbnail)
+      params.require(:post).permit(:title, :body, :thumbnail, :user_id)
     end
 end

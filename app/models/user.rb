@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :comments
   has_many :authorizations
+  has_many :posts
   validates :name, :email, :presence => true
     
   before_save { self.email = email.downcase }
