@@ -6,8 +6,10 @@ class UsersController < ApplicationController
   end
   
   def show
- #  @current_user = User.find_by(params:[:name])
-end
+ @current_user = User.find_by(params[:id])
+ @posts = @current_user.posts
+  end
+  
   def edit
     @user = User.find(params[:id])
   end

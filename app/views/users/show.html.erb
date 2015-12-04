@@ -6,4 +6,11 @@
 <hr>
 <h3>Email id:  <%= @current_user.email %></h3>
 <hr>
+<b>
+<div>
+<% @posts.each do |post| %>
+   <%=post.title%>
+  <% end %>
+</div>
+
 </b>

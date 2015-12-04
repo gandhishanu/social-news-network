@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130013126) do
+ActiveRecord::Schema.define(version: 20151204020922) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -47,9 +47,19 @@ ActiveRecord::Schema.define(version: 20151130013126) do
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
     t.boolean  "flagpost"
+    t.integer  "user_id"
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "relateds", force: :cascade do |t|
+    t.integer  "post_id1"
+    t.integer  "post_id2"
+    t.integer  "frequency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -60,7 +70,10 @@ ActiveRecord::Schema.define(version: 20151130013126) do
     t.string   "password_digest"
     t.boolean  "email_confirmed",      default: false, null: false
     t.string   "email_confirm_string"
+    t.integer  "posts_id"
   end
+
+  add_index "users", ["posts_id"], name: "index_users_on_posts_id"
 
   create_table "votes", force: :cascade do |t|
     t.integer  "updown_cd"

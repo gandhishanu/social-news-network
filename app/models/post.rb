@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :category
   has_many :votes
   has_many :comments
+  belongs_to :user
 
   def overall_votes
     upvotes = votes.where(updown_cd: 0).count
