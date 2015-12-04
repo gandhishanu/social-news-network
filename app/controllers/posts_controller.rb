@@ -28,13 +28,19 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-    @post.user_id = @current_user.id
-
-    if @post.save
-      flash[:notice] = 'Post was successfully created.'
-      redirect_to @post
+    if @current_user != nil
+      @post = Post.new(post_params)
+      #Can also look into the build method
+      @post.user_id = @current_user.id
+  
+      if @post.save
+        flash[:notice] = 'Post was successfully created.'
+        redirect_to @post
+      else
+        render :new
+      end
     else
+      flash[:notice] = 'Login to create a new post.'
       render :new
     end
   end

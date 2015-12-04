@@ -2,7 +2,8 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe PostsController do
-
+   fixtures :users
+   fixtures :posts
 =begin
     describe 'searching TMDb' do
         it 'should check for invalid search terms' do
@@ -35,6 +36,16 @@ describe PostsController do
         end
     end
 =end
+#action caching runs filters - only difference between page cache and action cache'
+#fragment cache - happens in view, any granual of a view - whole view to partial view
+#query cache - any amount of level to get arbitrary amounts of data outside any controller
+
+#under 17 visitors shouldnt see any movies QUIZ
+    #not page caching - doesnt run filters
+    #Action and fragment caching can both enforce the filters
+    
+#review.movie_id
+
     describe 'index method' do
         it 'should set the posts variable to all the posts' do
             expect(Post).to receive(:where).and_return("GoodPost")
@@ -52,20 +63,20 @@ describe PostsController do
         end
     end
     describe 'create method' do
-        it 'should save the post with the parameters given' do
-            #fake_post = double('post1')
-            #fake_post2 = double('post2')
-            #expect(Post).to receive(:new).and_return(fake_post)
-            #expect(fake_post).to receive(:save).and_return(true)
-            #expect(fake_post).to receive(:to_model).and_return(fake_post2)
-            #expect(fake_post2).to receive(:persisted?)
+        it 'should not save the post if not logged in' do
+            post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
+            expect(flash[:notice]).to eq "Login to create a new post."
+        end
+        it 'should save the post with the parameters given if logged in' do
+            controller.instance_variable_set(:@current_user, users(:test_user))
             post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
             expect(flash[:notice]).to eq "Post was successfully created."
             #expect(response).to redirect_to(fake_post) #make fake post respond to the redirect_to - first check
             #redirect to is wrapped in a url
         end
         it 'might not save the post correctly' do
-            fake_post = double('post1')
+            controller.instance_variable_set(:@current_user, users(:test_user))
+            fake_post = posts('test_post')
             expect(Post).to receive(:new).and_return(fake_post)
             expect(fake_post).to receive(:save).and_return(false)
             post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
@@ -73,7 +84,6 @@ describe PostsController do
         end
     end
     describe 'searching posts' do
-        fixtures :posts
         it 'should check for blank search terms' do
             post :search,  {:search_terms => ""}
             expect(response).to_not render_template('search')
@@ -110,12 +120,21 @@ describe PostsController do
         end
     end
     describe 'destroy method' do
-        fixtures :posts
         it 'should destroy the selected post and redirect back to the homepage' do
             @post_toDelete = posts(:test_post)
             expect(@post_toDelete).to receive(:destroy)
             @post_toDelete.destroy
             expect(response.status).to eq(200)
+        end
+    end
+    describe 'show method' do
+        it 'should set the @comment to a new comment' do
+            expect(Comment).to receive(:new).and_return("Yes")
+            #posts(:test_post).show
+            get :show,  {id: posts(:test_post)}
+            #puts @post
+            expect(controller.instance_variable_get("@comment")).to eq "Yes"
+            expect(controller.instance_variable_get("@post")).to eq posts(:test_post)
         end
     end
 =begin    describe 'update method' do
@@ -165,7 +184,6 @@ describe PostsController do
         end
 =end    end
     describe 'flagpost method' do
-        fixtures :posts
         it 'should flag the post and then send the user back to the homepage' do
             testPost = posts(:test_post)
             expect(posts(:test_post)).to receive(:save)
