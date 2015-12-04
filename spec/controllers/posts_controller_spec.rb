@@ -119,70 +119,114 @@ describe PostsController do
             end
         end
     end
+    describe 'edit method' do
+        it 'should redirect to the post_path if the user who created the post doesnt match the current user' do
+            controller.instance_variable_set(:@current_user, users(:test_user))
+            controller.instance_variable_set(:@post, posts(:test_post))
+            post :edit, {id: posts(:test_post)}
+            expect(response).to redirect_to("/posts/#{posts(:test_post).id}")
+        end
+        it 'should continue the application if the user who created the post matches the current user' do
+            testPost = posts(:test_post)
+            testUser = users(:test_user)
+            testPost.user_id = testUser.id
+            controller.instance_variable_set(:@current_user, testUser)
+            controller.instance_variable_set(:@post, testPost)
+            post :edit, {id: testPost}
+            #expect(response.status).to eq(200)
+            expect(response).to redirect_to("/posts/#{testPost.id}")
+        end
+    end
     describe 'destroy method' do
-        it 'should destroy the selected post and redirect back to the homepage' do
-            @post_toDelete = posts(:test_post)
-            expect(@post_toDelete).to receive(:destroy)
-            @post_toDelete.destroy
-            expect(response.status).to eq(200)
+        it 'should destroy the selected post and redirect back to the homepage if it was your post' do
+            testPost = posts(:test_post)
+            testUser = users(:test_user)
+            testPost.user_id = testUser.id
+            controller.instance_variable_set(:@current_user, testUser)
+            controller.instance_variable_set(:@post, testPost)
+            expect(testPost).to receive(:destroy)
+            expect(Post).to receive(:find).and_return(testPost)
+            post :destroy, {id: testPost}
+            expect(response.status).to eq(302)
+        end
+        it 'should not destroy the post if it was not the users post' do
+            testPost = posts(:test_post)
+            testUser = users(:test_user)
+            testPost.user_id = testUser.id+2
+            controller.instance_variable_set(:@current_user, testUser)
+            controller.instance_variable_set(:@post, testPost)
+            expect(Post).to receive(:find).and_return(testPost)
+            expect(testPost).not_to receive(:destroy)
+            post :destroy, {id: testPost}
+            expect(response.status).to eq(302)
+        end
+        it 'should not destroy the post if no user is logged in' do
+            testPost = posts(:test_post)
+            controller.instance_variable_set(:@current_user, nil)
+            controller.instance_variable_set(:@post, testPost)
+            expect(Post).to receive(:find).and_return(testPost)
+            expect(testPost).not_to receive(:destroy)
+            post :destroy, {id: testPost}
+            expect(response.status).to eq(302)
         end
     end
     describe 'show method' do
         it 'should set the @comment to a new comment' do
             expect(Comment).to receive(:new).and_return("Yes")
-            #posts(:test_post).show
             get :show,  {id: posts(:test_post)}
-            #puts @post
             expect(controller.instance_variable_get("@comment")).to eq "Yes"
             expect(controller.instance_variable_get("@post")).to eq posts(:test_post)
         end
     end
-=begin    describe 'update method' do
-        fixtures :posts
-        describe "PATCH #update" do
-          context "with good data" do
-            it "updates the wallet and redirects" do
-              patch :update, id: @post.id, post: { title: "xyz", body: "testing", thumbnail: "202"}
-              expect(response).to be_redirect
-            end
-          end
-          context "with bad data" do
-            it "does not change the wallet, and re-renders the form" do
-              patch :update, id: @post.id, post: { title: "xyz", body: "testing"}
-              expect(response).not_to be_redirect
-            end
-          end
-        end
-        describe 'update successfully' do
-            it 'should load the html page if specfied' do
-                #testPost = posts(:test_post)
-                #expect(testPost).to receive(update).and_return(true)
-                #testPost.update
-                my_model = stub_model(Post,:update=>true)
-                Post.stub(:update).with({:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}) { my_model }
-                post :update, :my_model => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}, :format => :json
-                #response.body.should == my_model.to_json
-                response.header['Content-Type'].should include 'application/json'
-            end
-            it 'should load the xml page if specified' do
+    describe 'update method' do
+        describe 'have the right permission' do
+            it 'should update the post properly' do
                 testPost = posts(:test_post)
-                expect(testPost).to receive(update).and_return(true)
-                testPost.update
+                testUser = users(:test_user)
+                testPost.user_id = testUser.id
+                controller.instance_variable_set(:@current_user, testUser)
+                controller.instance_variable_set(:@post, testPost)
+                expect(Post).to receive(:find).and_return(testPost)
+                expect(testPost).to receive(:update).and_return(true)
+                post :update, {id: testPost, :post => {:title => "Still a test", :body => "Just testing", :thumbnail => "test", :user_id => testUser.id}}
+                expect(response.status).to eq(302)
+                expect(flash[:notice]).to eq "Post was successfully updated."
+            end
+            it 'may not update properly' do
+                testPost = posts(:test_post)
+                testUser = users(:test_user)
+                testPost.user_id = testUser.id
+                controller.instance_variable_set(:@current_user, testUser)
+                controller.instance_variable_set(:@post, testPost)
+                expect(Post).to receive(:find).and_return(testPost)
+                expect(testPost).to receive(:update).and_return(false)
+                post :update, {id: testPost, :post => {:title => "Still a test", :body => "Just testing", :thumbnail => "test", :user_id => testUser.id}}
+                expect(response.status).to eq(200)
+                expect(flash[:notice]).to eq nil
             end
         end
-        describe 'not updated sucessfully' do 
-            it 'should load the html page if specfied' do
-                testPost = posts(:test_post)
-                expect(testPost).to receive(update).and_return(false)
-                testPost.update
-            end
-            it 'should load the xml page if specified' do
-                testPost = posts(:test_post)
-                expect(testPost).to receive(update).and_return(fals)
-                testPost.update
-            end
+        it 'should not update the post without a user logged in' do
+            testPost = posts(:test_post)
+            controller.instance_variable_set(:@post, testPost)
+            expect(Post).to receive(:find).and_return(testPost)
+            expect(testPost).not_to receive(:update)
+            post :update, {id: testPost, :post => {:title => "Still a test", :body => "Just testing", :thumbnail => "test", :user_id => 1}}
+            expect(response.status).to eq(200)
+            expect(flash[:notice]).to eq nil
         end
-=end    end
+        it 'should not update the post when a different user is logged in' do
+            testPost = posts(:test_post)
+            testUser = users(:test_user)
+            testPost.user_id = testUser.id+2
+            controller.instance_variable_set(:@current_user, testUser)
+            controller.instance_variable_set(:@post, testPost)
+            expect(Post).to receive(:find).and_return(testPost)
+            expect(testPost).not_to receive(:update)
+            post :update, {id: testPost, :post => {:title => "Still a test", :body => "Just testing", :thumbnail => "test", :user_id => testUser.id}}
+            expect(response.status).to eq(200)
+            expect(flash[:notice]).to eq nil
+        end
+    end
     describe 'flagpost method' do
         it 'should flag the post and then send the user back to the homepage' do
             testPost = posts(:test_post)

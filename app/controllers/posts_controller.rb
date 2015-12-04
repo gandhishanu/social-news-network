@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    if @current_user.id != @post.user_id
+    if @current_user == nil || @current_user.id != @post.user_id
       redirect_to post_path id:@post.id
     end
   end
@@ -48,12 +48,19 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      #might have to add user ID
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
+    if @current_user != nil && @current_user.id == @post.user_id
+      respond_to do |format|
+        #might have to add user ID
+        if @post.update(post_params)
+          format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+          format.json { render :show, status: :ok, location: @post }
+        else
+          format.html { render :edit }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -63,10 +70,17 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
+    if @current_user != nil && @current_user.id == @post.user_id
+      @post.destroy
+      respond_to do |format|
+        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to posts_url, notice: 'Must be your post inorder to destroy it.' }
+        format.json { head :no_content }
+      end
     end
   end
   
