@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 20151205183432) do
     t.string   "thumbnail"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
     t.integer  "category_id"
     t.boolean  "flagpost"
-    t.integer  "user_id"
     t.float    "trending"
   end
 
