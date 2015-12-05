@@ -22,6 +22,7 @@ class VotesController < ApplicationController
       vote = Vote.where(post_id: post_id, user_id: user_id).take
       cv_resp[:vote_casted] = vote.updown_cd if vote
       Related.update_relations
+      Post.update_trending
     end
 
     respond_to do |format|

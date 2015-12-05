@@ -18,4 +18,15 @@ class Post < ActiveRecord::Base
     end
     return votes.where(updown_cd: updown, user_id: current_user.id).count == 1
   end
+
+  def self.update_trending
+    all.each do |post|
+      score = post.overall_votes
+      sign = score <=> 0
+      order = Math.log10([score.abs, 1].max)
+      time = post.created_at.to_f - 1134028003
+      post.trending = (order * sign + time / 45000).round(7)
+      post.save!
+    end
+  end
 end

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.where(params.permit(:category_id))
+    @posts = Post.where(params.permit(:category_id)).order('trending DESC')
   end
 
   # GET /posts/1
@@ -87,19 +87,19 @@ class PostsController < ApplicationController
   def search
     if params[:search_terms] != "" && params[:search_terms] != nil
       @posts = Array.new()
-      Post.all.each do |pst|
+      Post.order('trending DESC').all.each do |pst|
         if pst.title.downcase.include?(params[:search_terms].downcase) || pst.body.downcase.include?(params[:search_terms].downcase)
           @posts.push pst
         end
       end
     else
-      @posts = Post.all
+      @posts = Post.order('trending DESC').all
       flash[:notice] = "No posts were found"
       render :index
     end
     
     if @posts == nil || @posts.empty?
-      @posts = Post.all
+      @posts = Post.order('trending DESC').all
       flash[:notice] = "No posts were found"
       render :index
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204165316) do
+ActiveRecord::Schema.define(version: 20151205183432) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -48,9 +48,11 @@ ActiveRecord::Schema.define(version: 20151204165316) do
     t.integer  "category_id"
     t.boolean  "flagpost"
     t.integer  "user_id"
+    t.float    "trending"
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
+  add_index "posts", ["trending"], name: "index_posts_on_trending"
 
   create_table "relateds", force: :cascade do |t|
     t.integer  "post_id1"
