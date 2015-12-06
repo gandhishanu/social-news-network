@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :comments
   has_many :authorizations
+  has_many :posts
   validates :name, :email, :presence => true
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",

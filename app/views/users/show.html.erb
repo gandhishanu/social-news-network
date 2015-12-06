@@ -1,3 +1,4 @@
+
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="col-md-4">
@@ -22,3 +23,20 @@
     <% end %>
   </div>
 </div>
+
+<h1>My Profile</h1>
+
+<b>
+<h3>Name: <%= @current_user.name %></h3> 
+<hr>
+<h3>Email id:  <%= @current_user.email %></h3>
+<hr>
+<b>
+<div>
+<% @posts.each do |post| %>
+   <%=post.title%>
+  <% end %>
+</div>
+
+</b>
+

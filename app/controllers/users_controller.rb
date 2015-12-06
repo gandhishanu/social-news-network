@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   
   
   def show
+
   @user  = User.find(1)
   @posts=@user.Posts
 end
@@ -16,6 +17,15 @@ end
     
 
   
+
+ @current_user = User.find_by(params[:id])
+ @posts = @current_user.posts
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+
      
   def create
     if User.exists?({:email => params[:user][:email]})
@@ -73,4 +83,6 @@ end
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+  end 
 end
+ 
