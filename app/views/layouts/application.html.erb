@@ -121,7 +121,7 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="showprofile">
+                  <a href="<%= url_for user_path id: @current_user.id %>">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Profile
                   </a>
                 </li>

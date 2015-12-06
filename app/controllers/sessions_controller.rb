@@ -38,10 +38,7 @@ class SessionsController < ApplicationController
     flash[:notice] = "Sorry, but you didn't allow access to our app!"
   end
  
- def logged_in?
-    !current_user.nil?
-  end
-  
+
   def destroy
     session[:session_token] = nil
     @current_user = nil
