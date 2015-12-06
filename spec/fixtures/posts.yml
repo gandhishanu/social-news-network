@@ -3,9 +3,13 @@ test_post:
     title: Test Post
     body: This is only a test
     thumbnail: testing
+    category_id: 1
+    flagpost: false
     
 test_post2:
     id: 2
     title: Second
     body: This is the second test
     thumbnail: NumTwo
+    category_id: 1
+    flagpost: false
