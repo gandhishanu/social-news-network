@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20151205183432) do
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
   add_index "posts", ["trending"], name: "index_posts_on_trending"
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "relateds", force: :cascade do |t|
     t.integer  "post_id1"
