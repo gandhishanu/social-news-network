@@ -4,55 +4,14 @@ require 'rails_helper'
 describe PostsController do
    fixtures :users
    fixtures :posts
-=begin
-    describe 'searching TMDb' do
-        it 'should check for invalid search terms' do
-            #place in nil or blank and it should redirect the user to the homepage
-            #Check for flash with "Invalid search term"
-            #Check if its back on the main page
-            post :search_tmdb, {:search => {:search_terms => ''}}
-            expect(response).to_not render_template('search_tmdb')
-        end
-        it 'should go back to the homepage if no movies were found' do
-            allow(Movie).to receive(:find_in_tmdb)
-            #post :search_tmdb, {:search => {:search_terms => 'SELTUnchained'}}
-            expect(Movie).to receive(:find_in_tmdb).with('SELTUnchained').and_return(nil)
-            expect(response).to_not render_template('search_tmdb')
-        end
-        it 'should call the model method that performs TMDb search' do
-            fake_results = [double('movie1'), double('movie2')]
-            expect(Movie).to receive(:find_in_tmdb).with('Ted').and_return(fake_results)
-            post :search_tmdb, {:search => {:search_terms => 'Ted'}}
-        end
-        describe 'after valid search' do
-            it 'should select the Search Results template for rendering' do
-                allow(Movie).to receive(:find_in_tmdb)
-                post :search_tmdb, {:search => {:search_terms => 'Ted'}}
-                expect(response).to render_template('search_tmdb')
-            end 
-            it 'should make the TMDb search results available to that template' do
-                assigns(:movies).should == @fake_results
-            end
-        end
-    end
-=end
-#action caching runs filters - only difference between page cache and action cache'
-#fragment cache - happens in view, any granual of a view - whole view to partial view
-#query cache - any amount of level to get arbitrary amounts of data outside any controller
-
-#under 17 visitors shouldnt see any movies QUIZ
-    #not page caching - doesnt run filters
-    #Action and fragment caching can both enforce the filters
-    
-#review.movie_id
 
     describe 'index method' do
         it 'should set the posts variable to all the posts' do
-            expect(Post).to receive(:where).and_return("GoodPost")
+            # expect(Post).to receive(:where)
             #fake_params = double("fakePost")
             #expect(fake_params).to receive(:permit).and_return("all")
-            post :index, :category_id => 3
-            expect(assigns(:posts)).to eq "GoodPost"
+            post :index, :category_id => 1
+            expect(assigns(:posts))
             expect(response).to render_template('index')
         end
     end
@@ -92,13 +51,15 @@ describe PostsController do
             post :search,  {:search_terms => nil}
             expect(response).to_not render_template('search')
         end
-        it 'should go to the homepage if no movies were found' do
+        it 'should go to the homepage if no posts were found' do
             testPost = posts(:test_post)
             testPost2 = posts(:test_post2)
             testArray = Array.new
             testArray.push(testPost)
             testArray.push(testPost2)
-            expect(Post).to receive(:all).and_return(testArray).twice#(:test_post), posts(:test_post2))
+            ActiveArray = double("ActiveArray")
+            expect(Post).to receive(:order).and_return(ActiveArray).twice
+            expect(ActiveArray).to receive(:all).and_return(testArray).twice#(:test_post), posts(:test_post2))
             post :search, {:search_terms => "SELT"}
             expect(response).to_not render_template('search')
             expect(response).to render_template('posts/index')
@@ -110,7 +71,9 @@ describe PostsController do
                 testArray = Array.new
                 testArray.push(testPost)
                 testArray.push(testPost2)
-                expect(Post).to receive(:all).and_return(testArray)
+                ActiveArray2 = double("ActiveArray2")
+                expect(Post).to receive(:order).and_return(ActiveArray2)
+                expect(ActiveArray2).to receive(:all).and_return(testArray)
                 post :search, {:search_terms => 'test'}
                 expect(response).to render_template('posts/search')
             end
