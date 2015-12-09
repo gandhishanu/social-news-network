@@ -5,7 +5,8 @@ RSpec.describe "comments/show", type: :view do
     @comment = assign(:comment, Comment.create!(
       :body => "MyText",
       :user_id => 1,
-      :comment_id => 2
+      :comment_id => 2,
+      :post_id => 1
     ))
   end
 
