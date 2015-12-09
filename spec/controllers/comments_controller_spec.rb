@@ -101,15 +101,8 @@ RSpec.describe CommentsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {user_id: 1, post_id: 2, body: 'hello this is a comment2.'}
       }
-
-      it "updates the requested comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => new_attributes}, valid_session
-        comment.reload
-        skip("Add assertions for updated state")
-      end
 
       it "assigns the requested comment as @comment" do
         comment = Comment.create! valid_attributes

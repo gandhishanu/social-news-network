@@ -78,7 +78,7 @@ describe PostsController do
                 expect(response).to render_template('posts/search')
             end
             it 'should make the TMDb search results available to that template' do
-                assigns(:posts).should == @fake_post
+                expect(assigns(:posts)).to eq @fake_post
             end
         end
     end
