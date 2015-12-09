@@ -19,22 +19,25 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe CommentsController, type: :controller do
-
+  fixtures :users
+  fixtures :posts
   # This should return the minimal set of attributes required to create a valid
   # Comment. As you add validations to Comment, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {user_id: 1, post_id: 2, body: 'hello this is a comment.'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {user_id: 1, post_id: 2}
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CommentsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) {
+    {'session_token'=> 'K7loJplbDl9hgmnrFGKm9Q'}
+  }
 
   describe "GET #index" do
     it "assigns all comments as @comments" do
@@ -83,7 +86,7 @@ RSpec.describe CommentsController, type: :controller do
 
       it "redirects to the created comment" do
         post :create, {:comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(Comment.last)
+        expect(response).to redirect_to(post_url(id: valid_attributes[:post_id]))
       end
     end
 
@@ -91,11 +94,6 @@ RSpec.describe CommentsController, type: :controller do
       it "assigns a newly created but unsaved comment as @comment" do
         post :create, {:comment => invalid_attributes}, valid_session
         expect(assigns(:comment)).to be_a_new(Comment)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:comment => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
       end
     end
   end
@@ -122,7 +120,7 @@ RSpec.describe CommentsController, type: :controller do
       it "redirects to the comment" do
         comment = Comment.create! valid_attributes
         put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(comment)
+        expect(response).to redirect_to(post_path id: valid_attributes[:post_id])
       end
     end
 
@@ -131,12 +129,6 @@ RSpec.describe CommentsController, type: :controller do
         comment = Comment.create! valid_attributes
         put :update, {:id => comment.to_param, :comment => invalid_attributes}, valid_session
         expect(assigns(:comment)).to eq(comment)
-      end
-
-      it "re-renders the 'edit' template" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
@@ -152,7 +144,7 @@ RSpec.describe CommentsController, type: :controller do
     it "redirects to the comments list" do
       comment = Comment.create! valid_attributes
       delete :destroy, {:id => comment.to_param}, valid_session
-      expect(response).to redirect_to(comments_url)
+      expect(response).to redirect_to(post_path(id: comment.post_id))
     end
   end
 
