@@ -109,6 +109,7 @@ class PostsController < ApplicationController
   def flagpost
     @post = Post.find(params[:id])
     @post.flagpost=true
+    @post.flagcount+=1
     @post.save
      flash[:success] = "post was flagged"
    redirect_to post_path id:@post.id

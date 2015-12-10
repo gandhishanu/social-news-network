@@ -5,19 +5,22 @@
     <section>
       <h1>
        
-        <%= @user.name %>
+       Hello, <%= @user.name %>
       </h1>
+      </div>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
   <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
-   
+    <%= render 'follow_form' %>
+    </div>
+<body>   
     <% if @user.posts.any? %>
-      <h3>posts (<%= @user.posts.count %>)</h3>
+      <h2> All that you have posted so far </h2>
 
+<br>
 <div class="row grid">
   <% @posts.each do |post| %>
       <div class="col-sm-6 col-md-3 grid-item">
@@ -39,11 +42,12 @@
 </div>
 
     <% end %>
-  </div>
-</div>
+  
+  
+
 
 
   
 
-</b>
+
 

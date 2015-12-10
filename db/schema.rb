@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205183432) do
+ActiveRecord::Schema.define(version: 20151209233437) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -43,12 +43,13 @@ ActiveRecord::Schema.define(version: 20151205183432) do
     t.string   "title"
     t.text     "body"
     t.string   "thumbnail"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "user_id"
     t.integer  "category_id"
     t.boolean  "flagpost"
     t.float    "trending"
+    t.integer  "flagcount",   default: 0
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
