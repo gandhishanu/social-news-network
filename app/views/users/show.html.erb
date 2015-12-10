@@ -1,9 +1,53 @@
 
-<h1>My Profile</h1>
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+       
+       Hello, <%= @user.name %>
+      </h1>
+      </div>
+    </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <%= render 'follow_form' %>
+    </div>
+<body>   
+    <% if @user.posts.any? %>
+      <h2> All that you have posted so far </h2>
 
-<b>
-<h3>Name: <%= @current_user.name %></h3> 
-<hr>
-<h3>Email id:  <%= @current_user.email %></h3>
-<hr>
-</b>
+<br>
+<div class="row grid">
+  <% @posts.each do |post| %>
+      <div class="col-sm-6 col-md-3 grid-item">
+        <div class="thumbnail">
+          <img src="<%= post.thumbnail %>" alt="<%= post.title %>">
+          <div class="caption">
+            <span class="glyphicon glyphicon-thumbs-up<%= post.is_voted_by_user(@current_user, 0) ? " voted" : "" %>"></span>
+            <span><%= post.overall_votes %></span>
+            <span class="glyphicon glyphicon-thumbs-down fa-flip-horizontal<%= post.is_voted_by_user(@current_user, 1) ? " voted" : "" %>"></span>
+            <span class="glyphicon glyphicon-comment" style="padding-left: 10px; color: cornflowerblue"><%= post.comments.count %></span>
+            <h3><%= post.title %></h3>
+            <% body = strip_tags(post.body) %>
+            <p><%= body[0..200].gsub(/\s\w+\s*$/,'...') %></p>
+            <p><a href="<%= url_for post_path(post) %>" class="btn btn-primary" role="button">View</a></p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+    <% end %>
+  
+  
+
+
+
+  
+
+
+

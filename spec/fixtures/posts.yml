@@ -5,6 +5,7 @@ test_post:
     thumbnail: testing
     category_id: 1
     flagpost: false
+    trending: 1.11
     
 test_post2:
     id: 2
@@ -13,3 +14,4 @@ test_post2:
     thumbnail: NumTwo
     category_id: 1
     flagpost: false
+    trending: 1.23

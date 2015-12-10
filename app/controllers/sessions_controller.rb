@@ -37,6 +37,7 @@ class SessionsController < ApplicationController
   def failure
     flash[:notice] = "Sorry, but you didn't allow access to our app!"
   end
+ 
 
   def destroy
     session[:session_token] = nil

@@ -1,0 +1,12 @@
+<h1>Followers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+<% @user.followers.each do |usr| %>
+  <td>
+    <%= usr.name %>
+  </td>
+<% end %>
+</table>

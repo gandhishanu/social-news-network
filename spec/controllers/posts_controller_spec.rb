@@ -4,6 +4,7 @@ require 'rails_helper'
 describe PostsController do
    fixtures :users
    fixtures :posts
+
 =begin
     describe 'searching TMDb' do
         it 'should check for invalid search terms' do
@@ -37,23 +38,13 @@ describe PostsController do
     end
 =end
 
-#action caching runs filters - only difference between page cache and action cache
-#fragment cache - happens in view, any granual of a view - whole view to partial view
-#query cache - any amount of level to get arbitrary amounts of data outside any controller
-
-#under 17 visitors shouldnt see any movies QUIZ
-    #not page caching - doesnt run filters
-    #Action and fragment caching can both enforce the filters
-    
-#review.movie_id
-
     describe 'index method' do
         it 'should set the posts variable to all the posts' do
-            expect(Post).to receive(:where).and_return("GoodPost")
+            # expect(Post).to receive(:where)
             #fake_params = double("fakePost")
             #expect(fake_params).to receive(:permit).and_return("all")
-            post :index, :category_id => 3
-            expect(assigns(:posts)).to eq "GoodPost"
+            post :index, :category_id => 1
+            expect(assigns(:posts))
             expect(response).to render_template('index')
         end
     end
@@ -72,8 +63,6 @@ describe PostsController do
             controller.instance_variable_set(:@current_user, users(:test_user))
             post :create, {:post => {:title => "testing", :body => "Test 123", :thumbnail => "Only a test"}}
             expect(flash[:notice]).to eq "Post was successfully created."
-            #expect(response).to redirect_to(fake_post) #make fake post respond to the redirect_to - first check
-            #redirect to is wrapped in a url
         end
         it 'might not save the post correctly' do
             controller.instance_variable_set(:@current_user, users(:test_user))
@@ -93,13 +82,15 @@ describe PostsController do
             post :search,  {:search_terms => nil}
             expect(response).to_not render_template('search')
         end
-        it 'should go to the homepage if no movies were found' do
+        it 'should go to the homepage if no posts were found' do
             testPost = posts(:test_post)
             testPost2 = posts(:test_post2)
             testArray = Array.new
             testArray.push(testPost)
             testArray.push(testPost2)
-            expect(Post).to receive(:all).and_return(testArray).twice#(:test_post), posts(:test_post2))
+            ActiveArray = double("ActiveArray")
+            expect(Post).to receive(:order).and_return(ActiveArray).twice
+            expect(ActiveArray).to receive(:all).and_return(testArray).twice#(:test_post), posts(:test_post2))
             post :search, {:search_terms => "SELT"}
             expect(response).to_not render_template('search')
             expect(response).to render_template('posts/index')
@@ -111,12 +102,14 @@ describe PostsController do
                 testArray = Array.new
                 testArray.push(testPost)
                 testArray.push(testPost2)
-                expect(Post).to receive(:all).and_return(testArray)
+                ActiveArray2 = double("ActiveArray2")
+                expect(Post).to receive(:order).and_return(ActiveArray2)
+                expect(ActiveArray2).to receive(:all).and_return(testArray)
                 post :search, {:search_terms => 'test'}
                 expect(response).to render_template('posts/search')
             end
             it 'should make the TMDb search results available to that template' do
-                assigns(:posts).should == @fake_post
+                expect(assigns(:posts)).to eq @fake_post
             end
         end
     end
@@ -134,7 +127,6 @@ describe PostsController do
             controller.instance_variable_set(:@current_user, testUser)
             controller.instance_variable_set(:@post, testPost)
             post :edit, {id: testPost}
-            #expect(response.status).to eq(200)
             expect(response).to redirect_to("/posts/#{testPost.id}")
         end
     end
@@ -229,13 +221,13 @@ describe PostsController do
         end
     end
     describe 'flagpost method' do
-        it 'should flag the post and then send the user back to the homepage' do
+        it 'should flag the post and then redirect to the post' do
             testPost = posts(:test_post)
             expect(posts(:test_post)).to receive(:save)
             expect(Post).to receive(:find).and_return(testPost)
             post :flagpost, {:params => {:id => 1}}
             expect(testPost[:flagpost]).to eq true
-            #expect(response).to redirect_to(post_path) #render_template('posts/search')
+            expect(response).to redirect_to("/posts/#{testPost.id}")
         end
     end
 end

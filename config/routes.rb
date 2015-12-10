@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   resources :posts
   resources :users
   #resources :forgot_password
-  
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   
   
   get '/signup'  => 'users#new'
@@ -20,6 +24,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', :to => 'sessions#create_omniauth'
   get '/auth/failure', :to => 'sessions#failure'
   get '/showprofile' => 'users#show'
+ 
+  
   
   match '/users/validate/:id/:email_confirm_string', to: 'users#validate_from_email', via: :get
   match '/users/pwr/:id/:email_confirm_string', to: 'forgot_password#reset_password', via: :get
@@ -35,6 +41,8 @@ Rails.application.routes.draw do
   get '/search', :to => 'posts#search'
 
   get '/cast_vote', to: 'votes#cast_vote'
+  
+   resources :relationships,       only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,4 +1,6 @@
 test_user:
+    id: 1
     name: Ali
     email: Allison@uiowa.edu
+    session_token: K7loJplbDl9hgmnrFGKm9Q
     

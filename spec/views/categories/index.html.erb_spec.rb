@@ -4,16 +4,20 @@ RSpec.describe "categories/index", type: :view do
   before(:each) do
     assign(:categories, [
       Category.create!(
-        :name => "Name"
+          :name => "MyString1",
+          :thumbnail => 'abc.jpg',
+          :description => 'this is a desciption'
       ),
       Category.create!(
-        :name => "Name"
+          :name => "MyString2",
+          :thumbnail => 'abc.jpg',
+          :description => 'this is a desciption'
       )
     ])
   end
 
   it "renders a list of categories" do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select "div.caption>h3", :count => 2
   end
 end

@@ -1,17 +1,26 @@
 class UsersController < ApplicationController
 
   before_filter :set_current_user
-    
+#  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+  
   def new
   end
   
+  
+  
   def show
- #  @current_user = User.find_by(params:[:name])
+  @user = User.find(params[:id])
+  @posts=@user.posts
   end
+  
+    
+
+  
   
   def edit
     @user = User.find(params[:id])
   end
+
      
   def create
     if User.exists?({:email => params[:user][:email]})
@@ -28,8 +37,8 @@ class UsersController < ApplicationController
       else
         flash[:warning] = user.errors.full_messages.first
         redirect_to new_user_path
-      end
-    end
+       end 
+     end
   end
   
   def validate_from_email
@@ -45,9 +54,28 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+    @user=User.find(params[:id])
+    
+    
+  end
+   def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    render 'show_follow'
+  end
+  
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    render 'show_follow'
+  end
+  
   
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+  
+ 
 end

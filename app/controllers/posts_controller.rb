@@ -4,12 +4,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.where(params.permit(:category_id))
+    @posts = Post.order('trending DESC').where(params.permit(:category_id))
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post_title = @post.title
     @comment = Comment.new()
   end
 
@@ -87,19 +88,19 @@ class PostsController < ApplicationController
   def search
     if params[:search_terms] != "" && params[:search_terms] != nil
       @posts = Array.new()
-      Post.all.each do |pst|
+      Post.order('trending DESC').all.each do |pst|
         if pst.title.downcase.include?(params[:search_terms].downcase) || pst.body.downcase.include?(params[:search_terms].downcase)
           @posts.push pst
         end
       end
     else
-      @posts = Post.all
+      @posts = Post.order('trending DESC').all
       flash[:notice] = "No posts were found"
       render :index
     end
     
     if @posts == nil || @posts.empty?
-      @posts = Post.all
+      @posts = Post.order('trending DESC').all
       flash[:notice] = "No posts were found"
       render :index
     end
@@ -108,6 +109,7 @@ class PostsController < ApplicationController
   def flagpost
     @post = Post.find(params[:id])
     @post.flagpost=true
+    @post.flagcount+=1
     @post.save
      flash[:success] = "post was flagged"
    redirect_to post_path id:@post.id
@@ -116,7 +118,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+       @post = Post.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204165316) do
+ActiveRecord::Schema.define(version: 20151209233437) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -43,14 +43,17 @@ ActiveRecord::Schema.define(version: 20151204165316) do
     t.string   "title"
     t.text     "body"
     t.string   "thumbnail"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "user_id"
     t.integer  "category_id"
     t.boolean  "flagpost"
-    t.integer  "user_id"
+    t.float    "trending"
+    t.integer  "flagcount",   default: 0
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
+  add_index "posts", ["trending"], name: "index_posts_on_trending"
 
   create_table "relateds", force: :cascade do |t|
     t.integer  "post_id1"
@@ -59,6 +62,17 @@ ActiveRecord::Schema.define(version: 20151204165316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -69,7 +83,10 @@ ActiveRecord::Schema.define(version: 20151204165316) do
     t.string   "password_digest"
     t.boolean  "email_confirmed",      default: false, null: false
     t.string   "email_confirm_string"
+    t.integer  "posts_id"
   end
+
+  add_index "users", ["posts_id"], name: "index_users_on_posts_id"
 
   create_table "votes", force: :cascade do |t|
     t.integer  "updown_cd"

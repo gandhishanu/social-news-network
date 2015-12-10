@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     
-    <title><%= content_for?(:title) ? yield(:title) : "SNN" %></title>
+    <title><%= @post_title.nil? ? "SNN" : @post_title %></title>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -101,7 +101,7 @@
               <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> SIGN IN via Facebook
             </a>
             -->
-            
+         
             <a class="btn btn-default" href="#loginModal" data-toggle="modal">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Sign In
             </a>
@@ -121,12 +121,12 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="showprofile">
+                  <a href="<%= url_for user_path id: @current_user.id %>">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Profile
                   </a>
                 </li>
                  <li>
-                  <a href="showprofile">
+                  <a href="<%= url_for user_path id: @current_user.id %>">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Update Profile 
                   </a>
                 </li>

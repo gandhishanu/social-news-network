@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   def create
     if @current_user.nil?
       flash[:warning] = "You must be logged in to post a comment."
-      return redirect_to request.referrer
+      return redirect_to post_path id: comment_params[:post_id]
     end
 
     @comment = Comment.new(comment_params)
@@ -34,11 +34,11 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to request.referrer, notice: 'Comment was successfully created.' }
+        format.html { redirect_to post_path(id: comment_params[:post_id]), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         flash[:warning] = "Cannot post blank comment."
-        format.html { redirect_to request.referrer }
+        format.html { redirect_to post_path id: comment_params[:post_id] }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -49,21 +49,21 @@ class CommentsController < ApplicationController
   def update
     if @current_user.nil?
       flash[:warning] = "You must be logged in to update your comments."
-      return redirect_to request.referrer
+      return redirect_to post_path(id: comment_params[:post_id])
     end
 
     if @comment.user_id != @current_user.id
       flash[:warning] = "You can only update your own comments."
-      return redirect_to request.referrer
+      return redirect_to post_path(id: comment_params[:post_id])
     end
 
     respond_to do |format|
       if @comment.update(body: comment_params[:body])
-        format.html { redirect_to request.referrer, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to post_path(id: comment_params[:post_id]), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         flash[:warning] = 'Cannot make the comment blank.';
-        format.html { redirect_to request.referrer}
+        format.html { redirect_to post_path(id: comment_params[:post_id])}
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -74,17 +74,17 @@ class CommentsController < ApplicationController
   def destroy
     if @current_user.nil?
       flash[:warning] = "You must be logged in to delete your comments."
-      return redirect_to request.referrer
+      return redirect_to post_path(id: @comment.post_id)
     end
 
     if @comment.user_id != @current_user.id
       flash[:warning] = "You can only delete your own comments."
-      return redirect_to request.referrer
+      return redirect_to post_path(id: @comment.post_id)
     end
 
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to post_path(id: @comment.post_id), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
