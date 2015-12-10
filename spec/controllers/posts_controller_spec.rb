@@ -36,7 +36,8 @@ describe PostsController do
         end
     end
 =end
-#action caching runs filters - only difference between page cache and action cache'
+
+#action caching runs filters - only difference between page cache and action cache
 #fragment cache - happens in view, any granual of a view - whole view to partial view
 #query cache - any amount of level to get arbitrary amounts of data outside any controller
 
