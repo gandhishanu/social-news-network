@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   
   
   
-  def show
+ def show
   @user = User.find(params[:id])
   @posts=@user.posts
   end
@@ -16,10 +16,7 @@ class UsersController < ApplicationController
     
 
   
-  
-  def edit
-    @user = User.find(params[:id])
-  end
+
 
      
   def create
