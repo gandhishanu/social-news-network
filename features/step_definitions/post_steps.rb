@@ -8,8 +8,19 @@
   #search for "log in" on the homepage
   #If finds "log in" and not "Logged in as"
   # log in with
-   #email: "haiderhameed@gmail.com"
-   #password: selt1234
+  click_button "Sign In"
+  visit posts_path
+  fill_in 'user_email', :with => "ali@uiowa.edu"
+  fill_in 'user_password', :with => "abcdef"
+  click_button 'Login'
+  result=false
+  all("button").each do |tr|
+    if tr.has_content?("Ali")
+      result = true
+      break
+    end
+  end  
+  expect(result).to be_truthy
  end
  
  When /^I have added a post with title "(.*?)" and body "(.*?)" and thumbnail "(.*?)"$/ do |title, body, thumbnail|
@@ -37,7 +48,7 @@
   click_button 'Update Post'
  end
  
- When /^I have visited the epanded page for the "(.*?)" post$/ do |title|
+ When /^I have visited the expanded page for the "(.*?)" post$/ do |title|
    visit posts_path
    all("div").each do |tr|
      if tr.has_content?(title) && tr.has_content?(body) && tr.has_content?(thumbnail)
