@@ -2,6 +2,12 @@ class UsersController < ApplicationController
 
   before_filter :set_current_user
 #  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+    
+  
+
+  
+  
+  
   
   def new
   end
@@ -27,7 +33,7 @@ class UsersController < ApplicationController
       flash[:warning] ="please enter password for updating profile"
       render 'edit'
     end
-    end
+end
 
     
   
@@ -35,15 +41,14 @@ class UsersController < ApplicationController
   
   def edit
    if @current_user.nil?
-     flash[:notice] = 'aksdfjas'
+     flash[:notice] = 'no user'
      return redirect_to posts_path
    end
    
    @user = @current_user
   end
 
-    
-
+ 
   
 
 
@@ -79,25 +84,25 @@ class UsersController < ApplicationController
       redirect_to login_path
     end
   end
-  end
   
-   def following
+     def following
     @title = "Following"
     @user  = User.find(params[:id])
     render 'show_follow'
-  end
+    end
   
   def followers
     @title = "Followers"
     @user  = User.find(params[:id])
     render 'show_follow'
-  end
+   end
+ 
   
   
-
+private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
-    
 
+end
 
