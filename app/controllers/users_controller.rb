@@ -11,8 +11,37 @@ class UsersController < ApplicationController
  def show
   @user = User.find(params[:id])
   @posts=@user.posts
-  end
+ end
   
+  def update
+   if @current_user.nil?
+     flash[:notice] = 'no user'
+     return redirect_to posts_path
+   end
+   
+    @user = User.find(params[:id])
+  if @user.update_attributes(user_params)
+      flash[:success] = " #{@user.name}, Your account has been updated"
+      redirect_to @user
+    else
+      flash[:warning] ="please enter password for updating profile"
+      render 'edit'
+    end
+    end
+
+    
+  
+  
+  
+  def edit
+   if @current_user.nil?
+     flash[:notice] = 'aksdfjas'
+     return redirect_to posts_path
+   end
+   
+   @user = @current_user
+  end
+
     
 
   
@@ -50,12 +79,8 @@ class UsersController < ApplicationController
       redirect_to login_path
     end
   end
-  
-  def edit
-    @user=User.find(params[:id])
-    
-    
   end
+  
    def following
     @title = "Following"
     @user  = User.find(params[:id])
@@ -69,10 +94,10 @@ class UsersController < ApplicationController
   end
   
   
-  private
+
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
-  
- 
-end
+    
+
+

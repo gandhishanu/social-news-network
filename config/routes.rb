@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
   
-  
+  get '/edit' => 'users#edit'
   get '/signup'  => 'users#new'
   get '/reset_password'  => 'forgot_password#update'
   get '/forgot_password'  => 'forgot_password#new'
