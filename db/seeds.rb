@@ -86,14 +86,14 @@ users.each do |user|
 end
 
 
-votes = [{updown_cd: 0, user_id: 1, post_id: 1},
-         {updown_cd: 0, user_id: 1, post_id: 2},
-         {updown_cd: 1, user_id: 1, post_id: 3},
-         {updown_cd: 1, user_id: 1, post_id: 4}]
-
-votes.each do |vote|
-  Vote.create!(vote)
-end
+# votes = [{updown_cd: 0, user_id: 1, post_id: 1},
+#          {updown_cd: 0, user_id: 1, post_id: 2},
+#          {updown_cd: 1, user_id: 1, post_id: 3},
+#          {updown_cd: 1, user_id: 1, post_id: 4}]
+#
+# votes.each do |vote|
+#   Vote.create!(vote)
+# end
 
 comments = [{user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
             {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
