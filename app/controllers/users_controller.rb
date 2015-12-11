@@ -88,7 +88,7 @@ end
      def following
     @title = "Following"
     @user  = User.find(params[:id])
-    render 'show_follow'
+    render 'show_following'
     end
   
   def followers
