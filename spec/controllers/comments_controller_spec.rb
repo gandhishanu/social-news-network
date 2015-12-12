@@ -78,6 +78,12 @@ RSpec.describe CommentsController, type: :controller do
         }.to change(Comment, :count).by(1)
       end
 
+      it "creates a new Comment without login" do
+        expect {
+          post :create, {:comment => valid_attributes}
+        }.to change(Comment, :count).by(0)
+      end
+
       it "assigns a newly created comment as @comment" do
         post :create, {:comment => valid_attributes}, valid_session
         expect(assigns(:comment)).to be_a(Comment)
@@ -115,6 +121,13 @@ RSpec.describe CommentsController, type: :controller do
         put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
         expect(response).to redirect_to(post_path id: valid_attributes[:post_id])
       end
+
+      it "should fail if not logged in" do
+        comment = Comment.create! valid_attributes
+        put :update, {:id => comment.to_param, :comment => valid_attributes}
+        expect(response).to redirect_to(post_path id: valid_attributes[:post_id])
+        expect(flash[:warning]).to be_present
+      end
     end
 
     context "with invalid params" do
@@ -132,6 +145,13 @@ RSpec.describe CommentsController, type: :controller do
       expect {
         delete :destroy, {:id => comment.to_param}, valid_session
       }.to change(Comment, :count).by(-1)
+    end
+
+    it "should fail if not logged in" do
+      comment = Comment.create! valid_attributes
+      expect {
+        delete :destroy, {:id => comment.to_param}
+      }.to change(Comment, :count).by(0)
     end
 
     it "redirects to the comments list" do
