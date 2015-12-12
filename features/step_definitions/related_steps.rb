@@ -19,8 +19,8 @@ end
 
 Given(/^"(.*?)", "(.*?)" and "(.*?)" are registered$/) do |userA, userB, userC|
   User.create!({id: 1, name: userA, email: "email1@email.com", password:'password'})
-  User.create!({id: 2, name: userB, email: "email1@email.com", password:'password'})
-  User.create!({id: 3, name: userC, email: "email1@email.com", password:'password'})
+  User.create!({id: 2, name: userB, email: "email2@email.com", password:'password'})
+  User.create!({id: 3, name: userC, email: "email3@email.com", password:'password'})
 end
 
 Given(/^posts "(.*?)", "(.*?)" and "(.*?)" exist$/) do |postA, postB, postC|
@@ -33,9 +33,14 @@ Given(/^"(.*?)" up voted "(.*?)" and "(.*?)"$/) do |user, post1, post2|
   user = User.find_by_name(user)
   post1 = Post.find_by_title(post1)
   post2 = Post.find_by_title(post2)
-
+  Vote.create!({updown_cd: 0, user_id: user.id, post_id: post1.id})
+  Vote.create!({updown_cd: 0, user_id: user.id, post_id: post2.id})
+  Related.update_relations
 end
 
-Then(/^I should see "(.*?)" before "(.*?)" as related in related section$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see "(.*?)" before "(.*?)" as related in related section$/) do |post1, post2|
+  titles = post1 + ".*" + post2
+  titles = [post1, post2].join(".*")
+  result = /#{titles}/m =~ page.body
+  expect(result).to be_truthy
 end

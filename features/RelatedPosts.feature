@@ -21,4 +21,4 @@ Feature: User should be able to see related posts
     And "User B" up voted "Post A" and "Post C"
     And "User C" up voted "Post A" and "Post C"
     When I am viewing "Post A"
-    Then I should see "Post C" before "Post A" as related in related section
+    Then I should see "Post C" before "Post B" as related in related section
