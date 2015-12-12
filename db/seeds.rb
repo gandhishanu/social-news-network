@@ -9,7 +9,7 @@
 #$("#grid li").each(function(){console.log('<token1>' + $(this).find("h4").text() + '<token2>' + $(this).find("img").attr("src") + "<token3>" + $(this).find("p").text())})
 
 categories = [{:name=>'Politics', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266382yrizaffopt.jpg', :description=>'Check out our hot news from politics. We are here to inform you about everything, wherever you are, whatever your age.'},
-              {:name=>'Bussiness', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301546alfopt.jpg', :description=>'Business publication. business news, trends and profiles. Read our articles and inform about latest trends.'},
+              {:name=>'Business', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442301546alfopt.jpg', :description=>'Business publication. business news, trends and profiles. Read our articles and inform about latest trends.'},
               {:name=>'Technology', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442266476ci.jpg', :description=>'Latest news from tech, be in contact with us.'},
               {:name=>'Entertainment', :thumbnail=>'http://buzzybuzz.net/img/thumbnails/1442265344girl11opt.jpg', :description=>'Entertainment news, celebrities, celeb news, and celebrity gossip. Check out the hottest fashion, photos, movies.'},
               {:name=>'Media', :thumbnail=>'http://31.media.tumblr.com/tumblr_lvh3okJPqZ1qa0o0mo1_250.gif', :description=>'Media news, opinion and analysis. Be in contact with us!'},
@@ -86,23 +86,23 @@ users.each do |user|
 end
 
 
-votes = [{updown_cd: 0, user_id: 1, post_id: 1},
-         {updown_cd: 0, user_id: 1, post_id: 2},
-         {updown_cd: 1, user_id: 1, post_id: 3},
-         {updown_cd: 1, user_id: 1, post_id: 4}]
+# votes = [{updown_cd: 0, user_id: 1, post_id: 1},
+#          {updown_cd: 0, user_id: 1, post_id: 2},
+#          {updown_cd: 1, user_id: 1, post_id: 3},
+#          {updown_cd: 1, user_id: 1, post_id: 4}]
+#
+# votes.each do |vote|
+#   Vote.create!(vote)
+# end
 
-votes.each do |vote|
-  Vote.create!(vote)
-end
-
-comments = [{user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {user_id: 1, post_id: 1, body: "This is a small comment"},
-            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {user_id: 1, post_id: 1, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
-            {user_id: 3, post_id: 1, comment_id: 1, body: "this is a reply"},
-            {user_id: 4, post_id: 1, comment_id: 7, body: "this is reply of your reply Sam..."},]
+comments = [{user_id: 1, post_id: 41, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 41, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 41, body: "This is a small comment"},
+            {user_id: 1, post_id: 41, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 41, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 1, post_id: 41, body: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
+            {user_id: 3, post_id: 41, comment_id: 1, body: "this is a reply"},
+            {user_id: 4, post_id: 41, comment_id: 7, body: "this is reply of your reply Sam..."},]
 
 comments.each do |comment|
   Comment.create!(comment)

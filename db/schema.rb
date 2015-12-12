@@ -83,10 +83,7 @@ ActiveRecord::Schema.define(version: 20151209233437) do
     t.string   "password_digest"
     t.boolean  "email_confirmed",      default: false, null: false
     t.string   "email_confirm_string"
-    t.integer  "posts_id"
   end
-
-  add_index "users", ["posts_id"], name: "index_users_on_posts_id"
 
   create_table "votes", force: :cascade do |t|
     t.integer  "updown_cd"

@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 230 }, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },uniqueness:{case_sensitive:false}
   validates :password, presence: true, length: { minimum: 6 }
   validates_confirmation_of :password
+  
 
     
   def self.create_user! (hash)

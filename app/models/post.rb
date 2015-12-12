@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
     score = overall_votes
     sign = score <=> 0
     order = Math.log10([score.abs, 1].max)
-    created_at = @created_at.nil? ? Time.now : @created_at
+    created_at = self.created_at.nil? ? Time.now : self.created_at
     time = created_at.to_f - 1134028003
     self.trending = (order * sign + time / 45000).round(7)
   end
